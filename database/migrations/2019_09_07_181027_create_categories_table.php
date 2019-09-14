@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name',20);
             $table->unsignedBigInteger('parent')->nullable();
-            $table->binary('is_parent');
+            $table->enum('is_parent',['0','1']);
             $table->timestamps();
         });
     }
