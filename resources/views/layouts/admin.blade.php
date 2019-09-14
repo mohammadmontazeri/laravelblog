@@ -143,7 +143,7 @@ desired effect
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a href="{{}}"><i class="fa fa-edit"></i> <span>کاربران</span></a></li>
+                    <li class="active"><a href="{{url(route('user.index'))}}"><i class="fa fa-edit"></i> <span>کاربران</span></a></li>
                     <li><a href="#"><i class="fa fa-circle"></i> <span>دسته بندی ها</span></a>
                         <ul class="treeview-menu">
                             <li><a href="index.php?c=category&a=index">نمایش دسته بندی ها</a></li>

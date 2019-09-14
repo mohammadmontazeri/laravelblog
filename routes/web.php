@@ -28,11 +28,17 @@ Route::prefix('admin')->group(function (){
     Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('adminVerification.verify');
     Route::get('email/resend', 'Auth\VerificationController@resend')->name('adminVerification.resend');
     Route::resource('/user','Admin\UserController');
-});/*
-Route::get('/admin/test',function (){
+});
+Route::post('/admin/test',function (\Illuminate\Http\Request $request){
     //$user = \Illuminate\Support\Facades\Auth::user();
-    \Illuminate\Support\Facades\Auth::logout();
-    return "vsdjg";
-});*/
+    if ($request->user_search == ""){
+        $msg = "عبارتی را برای جستجو وارد نمایید";
+        return redirect(route('user.index'))->with('msg',$msg);
+    }else{
+        $users = \App\User::where('name','like',"%$request->user_search%")->get();
+        return view('admin.user.search',compact('users'));
+    }
+
+})->name('userSearch');
 //Route::get('/home', 'HomeController@index')->name('home');
 

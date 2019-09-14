@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Hekmatinasser\Verta\Verta;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::get();
-        return redirect('admin.user.index',compact('users'));
+        $users = User::latest()->paginate(2);
+        return view('admin.user.index',compact('users'));
     }
 
     /**
@@ -59,7 +61,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
@@ -71,7 +73,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if (isset($request['password'])){
+            $pass = Hash::make($request['password']);
+        }else{
+            $pass = $user->password;
+        }
+        if ($request['name'] == ""){
+            return redirect("admin/user/{$user->id}/edit")->with('msg','**نام کاربری را وارد نمایید**');
+        }
+        $user->update([
+            'name' => $request->name,
+            'password' => $pass,
+            'status' => $request->status
+        ]);
+        return back();
     }
 
     /**
@@ -82,6 +97,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return back();
     }
 }

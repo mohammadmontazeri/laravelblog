@@ -16,4 +16,11 @@ class User extends Authenticatable
         'name','email','password'
     ];
 
+    // Set Custom Slug For Module
+/*
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }*/
+
 }

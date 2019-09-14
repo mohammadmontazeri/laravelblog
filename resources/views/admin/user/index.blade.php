@@ -6,12 +6,18 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">لیست همه کاربران</h3>
+                    @if(session('msg'))
+                        <label style="color: #f0004c">{{session('msg')}}</label>
+                    @endif
                     <div class="box-tools">
-                        <div class="input-group" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                            </div>
+                        <div class="input-group" style="width: 200px;">
+                            <form action="{{route('userSearch')}}" method="POST" style="display: flex;">
+                                @csrf
+                                <input type="text" name="user_search" class="form-control input-sm pull-right" placeholder="کاربر مورد نظر را بیابید ..." style="width: 150px;">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div><!-- /.box-header -->
@@ -22,7 +28,6 @@
                             <th>آی دی کاربر</th>
                             <th>نام</th>
                             <th>ایمیل</th>
-                            <th>تصویر</th>
                             <th style="width: 11%;">تاریخ عضویت</th>
                             <th>وضعیت</th>
                             <th>دسترسی</th>
@@ -30,14 +35,10 @@
                             <th>حذف</th>
                         </tr>
                         @foreach($users as $user)
-                            <?php
-
-                            ?>
                         <tr>
                             <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                            <td><img src="{{asset("public".$user->img)}}" style="width: 50px;height: 50px;"></td>
                             <td><?php
                                     $v = new Verta($user->created_at);
                                     $v = \Hekmatinasser\Verta\Verta::instance($user->created_at);
@@ -54,33 +55,25 @@
                             </span></td>
                             <td><span class="label label-info">{{$user->role}}</span></td>
                             <td>
-                                @if($user->id == \Illuminate\Support\Facades\Auth::user()->id)
-                                    @if(\Illuminate\Support\Facades\Auth::user()->super_admin == 1)
-                                    @else
-                                        <a class="label label-primary" href="{{route('user.edit',['user'=>$user])}}">ویرایش</a>
-                                    @endif
-                                @endif
-                                @can('update',\Illuminate\Support\Facades\Auth::user())
                                     <a class="label label-primary" href="{{url(route('user.edit',['user'=>$user]))}}">ویرایش</a>
-                                @endcan
-
                             </td>
                             <td>
-                               <form method="post" action="{{route('user.destroy',['user'=>$user])}}">
+                              @if($user->role != "admin")
+                                    <form method="post" action="{{route('user.destroy',['user'=>$user])}}">
                                         {{csrf_field()}}
                                         {{method_field('delete')}}
-                                    @can('update',\Illuminate\Support\Facades\Auth::user())
                                         <button class="btn btn-danger">حذف</button>
-                                    @endcan
-                                </form>
+                                    </form>
+
+                              @endif
                             </td>
                         </tr>
-
                         @endforeach
 
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+            {{$users->links()}}
         </div>
     </div>
 @endsection
