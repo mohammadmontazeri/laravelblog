@@ -55,7 +55,7 @@
                             </span></td>
                             <td><span class="label label-info">{{$user->role}}</span></td>
                             <td>
-                                    <a class="label label-primary" href="{{url(route('user.edit',['user'=>$user]))}}">ویرایش</a>
+                                    <a class="label label-primary" href="{{url(route('user.edit',['user'=>$user->name]))}}">ویرایش</a>
                             </td>
                             <td>
                               @if($user->role != "admin")
@@ -64,7 +64,6 @@
                                         {{method_field('delete')}}
                                         <button class="btn btn-danger">حذف</button>
                                     </form>
-
                               @endif
                             </td>
                         </tr>

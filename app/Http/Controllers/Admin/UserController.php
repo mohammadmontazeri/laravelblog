@@ -86,7 +86,7 @@ class UserController extends Controller
             'password' => $pass,
             'status' => $request->status
         ]);
-        return back();
+        return redirect(route('user.index'))->with('msg','کاربر مورد نظر شما با موفقیت ویرایش شد');
     }
 
     /**
@@ -99,6 +99,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return back();
+        return redirect(route('user.index'))->with('msg','کاربر مورد نظر شما با موفقیت حذف شد');
     }
 }

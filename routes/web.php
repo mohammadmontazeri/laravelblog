@@ -28,17 +28,23 @@ Route::prefix('admin')->group(function (){
     Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('adminVerification.verify');
     Route::get('email/resend', 'Auth\VerificationController@resend')->name('adminVerification.resend');
     Route::resource('/user','Admin\UserController');
-});
-Route::post('/admin/test',function (\Illuminate\Http\Request $request){
-    //$user = \Illuminate\Support\Facades\Auth::user();
-    if ($request->user_search == ""){
-        $msg = "عبارتی را برای جستجو وارد نمایید";
-        return redirect(route('user.index'))->with('msg',$msg);
-    }else{
-        $users = \App\User::where('name','like',"%$request->user_search%")->get();
-        return view('admin.user.search',compact('users'));
-    }
+    Route::post('/userSearch',function (\Illuminate\Http\Request $request){
+        //$user = \Illuminate\Support\Facades\Auth::user();
+        if ($request->user_search == ""){
+            $msg = "عبارتی را برای جستجو وارد نمایید";
+            return redirect(route('user.index'))->with('msg',$msg);
+        }else{
+            $users = \App\User::where('name','like',"%$request->user_search%")->get();
+            return view('admin.user.search',compact('users'));
+        }
 
-})->name('userSearch');
-//Route::get('/home', 'HomeController@index')->name('home');
+    })->name('userSearch');
+    Route::resource('/category','Admin\CategoryController');
+    Route::resource('/post','Admin\PostController');
+    Route::post('ckeditor/image_upload', 'Admin\PostController@upload')->name('upload');
+    Route::get('post/detail/{detail}',function (\App\Post $detail){
+        return view('admin.post.detail',compact('detail'));
+    })->name('postDetail');
+
+});
 

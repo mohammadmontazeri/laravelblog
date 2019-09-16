@@ -144,20 +144,13 @@ desired effect
                 <ul class="sidebar-menu">
                     <!-- Optionally, you can add icons to the links -->
                     <li class="active"><a href="{{url(route('user.index'))}}"><i class="fa fa-edit"></i> <span>کاربران</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle"></i> <span>دسته بندی ها</span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="index.php?c=category&a=index">نمایش دسته بندی ها</a></li>
-                        </ul>
+                    <li><a href="{{url(route('category.index'))}}"><i class="fa fa-circle"></i> <span>دسته بندی ها</span></a>
                     </li>
-                    <li><a href="index.php?c=product&a=index"><i class="fa fa-square"></i> <span>بخش محصولات</span></a></li>
                     <li class="treeview">
                         <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>کامنت ها</span> <i class="fa fa-angle-left"></i></a>
                     </li>
                     <li class="treeview">
-                        <a href="index.php?c=order&a=index"><i class="fa fa-circle"></i> <span>سفارشات</span> <i class="fa fa-angle-left"></i></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="index.php?c=order&a=payments"><i class="fa fa-circle"></i> <span>پرداخت ها</span> <i class="fa fa-angle-left"></i></a>
+                        <a href="{{url(route('post.index'))}}"><i class="fa fa-circle"></i> <span>پست ها</span> <i class="fa fa-angle-left"></i></a>
                     </li>
                     <li>
                             <a href="{{route("adminLogout")}}"><i class="fa fa-square"></i> <span>خروج</span></a>
@@ -238,9 +231,12 @@ desired effect
 <script src="{{asset('public/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('public/dist/js/app.min.js')}}"></script>
-<script src="{{asset('public/ckeditor/ckeditor.js')}}"></script>
+<script src="{{ asset("public/ckeditor/ckeditor.js") }}"></script>
 <script>
-
+    CKEDITOR.replace( 'editor1', {
+        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
 </script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

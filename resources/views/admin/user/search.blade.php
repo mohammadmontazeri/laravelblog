@@ -1,3 +1,6 @@
+<?php
+use Hekmatinasser\Verta\Verta;
+?>
 @extends('layouts.admin')
 
 @section('content')
@@ -34,26 +37,28 @@
                                                         <td>{{$user->name}}</td>
                                                         <td>{{$user->email}}</td>
                                                         <td><?php
-                                                            /* $v = new Verta($user->created_at);
+                                                             $v = new Verta($user->created_at);
                                                              $v = \Hekmatinasser\Verta\Verta::instance($user->created_at);
                                                              $v = \Hekmatinasser\Verta\Verta::persianNumbers($v);
-                                                             echo $v;*/
+                                                             echo $v;
                                                             ?></td>
-                                                        <td><span class="label label-success">
-                                   @if($user->status == 0 )
+                                                        <td>
+                                                            <span class="label label-success">
+                                                                @if($user->status == 0 )
                                                                     غیر فعال
                                                                 @else()
                                                                     فعال
                                                                 @endif
 
-                            </span></td>
+                                                            </span>
+                                                        </td>
                                                         <td><span class="label label-info">{{$user->role}}</span></td>
                                                         <td>
-                                                            <a class="label label-primary" href="{{url(route('user.edit',['user'=>$user->id]))}}">ویرایش</a>
+                                                            <a class="label label-primary" href="{{url(route('user.edit',['user'=>$user]))}}">ویرایش</a>
                                                         </td>
                                                         <td>
                                                             @if($user->role != "admin")
-                                                                <form method="post" action="{{route('user.destroy',['user'=>$user->id])}}">
+                                                                <form method="post" action="{{route('user.destroy',['user'=>$user])}}">
                                                                     {{csrf_field()}}
                                                                     {{method_field('delete')}}
                                                                     <button class="btn btn-danger">حذف</button>
