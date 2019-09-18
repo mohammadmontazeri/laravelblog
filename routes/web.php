@@ -37,7 +37,6 @@ Route::prefix('admin')->group(function (){
             $users = \App\User::where('name','like',"%$request->user_search%")->get();
             return view('admin.user.search',compact('users'));
         }
-
     })->name('userSearch');
     Route::resource('/category','Admin\CategoryController');
     Route::resource('/post','Admin\PostController');
@@ -45,6 +44,10 @@ Route::prefix('admin')->group(function (){
     Route::get('post/detail/{detail}',function (\App\Post $detail){
         return view('admin.post.detail',compact('detail'));
     })->name('postDetail');
+    Route::resource('/comment','Admin\CommentController');
 
 });
 
+Route::get('/test',function (){
+   return view('home');
+});

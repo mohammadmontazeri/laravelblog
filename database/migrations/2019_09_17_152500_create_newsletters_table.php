@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCommentTable extends Migration
+class CreateNewslettersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class UpdateCommentTable extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-       $table->unsignedBigInteger('post_id')->after('user_id');
-       $table->foreign('post_id')->references('id')->on('posts')
-           ->onUpdate('cascade')->onDelete('cascade');
-
-    });
+        Schema::create('newsletters', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('email');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,6 +27,6 @@ class UpdateCommentTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('newsletters');
     }
 }

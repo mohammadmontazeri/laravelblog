@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Comment;
+use App\Instapost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Hekmatinasser\Verta\Verta;
 
-class CommentController extends Controller
+class InstapostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::latest()->paginate(2);
-        return view('admin.comment.index',compact('comments'));
+        //
     }
 
     /**
@@ -27,7 +25,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        return view('admin.comment.create');
+        //
     }
 
     /**
@@ -38,32 +36,16 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            'text' => 'required'
-        ]);
-        $action = $_GET['q'];
-        switch ($action){
-
-            case 'addAdmin':
-                Comment::create([
-                    'text'=>$request->text,
-                    'user_id'=>Auth()->user()->id,
-                    'post_id'=>$request->post_id
-                ]);
-                return back()->with('msg','کامنت مورد نظر با موفقیت افزوده شد ');
-                break;
-        }
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Instapost  $instapost
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Instapost $instapost)
     {
         //
     }
@@ -71,10 +53,10 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Instapost  $instapost
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Instapost $instapost)
     {
         //
     }
@@ -83,10 +65,10 @@ class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  \App\Instapost  $instapost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Instapost $instapost)
     {
         //
     }
@@ -94,10 +76,10 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Instapost  $instapost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Instapost $instapost)
     {
         //
     }

@@ -59,7 +59,7 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="{{url('admin')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -147,13 +147,22 @@ desired effect
                     <li><a href="{{url(route('category.index'))}}"><i class="fa fa-circle"></i> <span>دسته بندی ها</span></a>
                     </li>
                     <li class="treeview">
-                        <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>کامنت ها</span> <i class="fa fa-angle-left"></i></a>
+                        <a href="{{url(route('post.index'))}}"><i class="fa fa-circle"></i> <span>پست ها</span> </a>
                     </li>
                     <li class="treeview">
-                        <a href="{{url(route('post.index'))}}"><i class="fa fa-circle"></i> <span>پست ها</span> <i class="fa fa-angle-left"></i></a>
+                        <a href="{{url(route('comment.index'))}}"><i class="fa fa-comment"></i> <span>کامنت ها</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>تبلیغات</span> </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>پست های اینستاگرامی</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>درباره من</span> </a>
                     </li>
                     <li>
-                            <a href="{{route("adminLogout")}}"><i class="fa fa-square"></i> <span>خروج</span></a>
+                            <a href="{{route("adminLogout")}}" style="color: #f94877"><i class="fa fa-square"></i> <span>خروج</span></a>
                     </li>
                 </ul><!-- /.sidebar-menu -->
             </section>

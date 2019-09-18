@@ -33,7 +33,8 @@
                             <td>
                                 <img src="{{asset("public/$category[image]")}}" alt="" width="75px">
                             </td>
-                            <td><?php
+                            <td>
+                                <?php
                                 $v = new Verta($category->created_at);
                                 $v = \Hekmatinasser\Verta\Verta::instance($category->created_at);
                                 $v = \Hekmatinasser\Verta\Verta::persianNumbers($v);
