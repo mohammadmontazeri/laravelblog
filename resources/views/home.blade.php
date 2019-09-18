@@ -1,4 +1,5 @@
-@include('layouts.web')
+@include('layouts.webHeader')
+@include('layouts.webSidebar')
 @section('content')
     <div class="col-lg-8 col-md-12">
         <div class="blog-posts">
@@ -177,5 +178,6 @@
 
         </div><!-- blog-posts -->
     </div><!-- col-lg-4 -->
-@show
+@endsection
 @include('layouts.webAside')
+@include('layouts.webFooter')

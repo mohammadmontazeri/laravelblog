@@ -60,7 +60,20 @@
                 <hr>
                 <div class="form-group">
                     <label for="exampleInputEmail1">تگ ها</label>
-                    <input type="text" class="form-control" name="tags"   placeholder=" تگ ها را به صورت شکل مقابل بدون فاصله وارد کنید ->  تگ۱-تگ۲">
+                    <?php
+                        $tags = \App\Tag::all();
+                        foreach ($tags as $tag){
+                         ?>
+                    <div class="form-check">
+                        <input class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->name}}" id="defaultCheck1" >
+                        <label class="form-check-label" for="defaultCheck1">
+                            {{$tag->name}}
+                        </label>
+                    </div>
+
+                    <?php
+                        }
+                    ?>
                 </div>
                 <hr>
                 <div class="form-group">

@@ -1,9 +1,14 @@
 
+
+<section class="section blog-area" style="margin-top: 250px;">
+    <div class="container">
+        <div class="row">
+            @yield('content')
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar-area">
 
                     <div class="sidebar-section about-author center-text">
-                        <div class="author-image"><img src="images/author-1-200x200.jpg" alt="Autohr Image"></div>
+                        <div class="author-image"><img src="{{asset('public/dist/img/avatar.png')}}" alt="Autohr Image"></div>
 
                         <ul class="social-icons">
                             <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
@@ -135,52 +140,8 @@
                         </ul>
                     </div><!-- sidebar-section tags-area -->
 
-
                 </div><!-- about-author -->
             </div><!-- col-lg-4 -->
-</div><!-- row -->
-</div><!-- container -->
-</section><!-- section -->
-
-
-<footer>
-    <div class="container">
-        <div class="row">
-
-            <div class="col-sm-6">
-                <div class="footer-section">
-                    <p class="copyright">Juli &copy; 2018. All rights reserved. | This template is made with <i class="ion-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                </div><!-- footer-section -->
-            </div><!-- col-lg-4 col-md-6 -->
-
-            <div class="col-sm-6">
-                <div class="footer-section">
-                    <ul class="social-icons">
-                        <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
-                    </ul>
-                </div><!-- footer-section -->
-            </div><!-- col-lg-4 col-md-6 -->
-
         </div><!-- row -->
     </div><!-- container -->
-</footer>
-
-
-<!-- SCIPTS -->
-
-<script src="{{asset('public/common-js/jquery-3.1.1.min.js')}}"></script>
-
-<script src="{{asset('public/common-js/tether.min.js')}}"></script>
-
-<script src="{{asset('public/common-js/bootstrap.js')}}"></script>
-
-<script src="{{asset('public/common-js/layerslider.js')}}"></script>
-
-<script src="{{asset('public/common-js/scripts.js')}}"></script>
-
-</body>
-</html>
+</section><!-- section -->

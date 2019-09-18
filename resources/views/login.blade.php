@@ -1,7 +1,7 @@
-@extends('layouts.web')
-
+@include('layouts.webHeader')
 @section('content')
-    <section class="login_part">
+    <div class="col-lg-8 col-md-12">
+      <div class="login_part">
         <div class="top">
           <span>
               ورود به حساب کاربری
@@ -12,7 +12,7 @@
               با استفاده از <span class="logo">وب اینجا</span> به یک توسعه دهنده حرفه ای تبدیل شو
           </span>
         </div>
-        <form method="post" enctype="multipart/form-data" action="{{route('user.login')}}">
+        <form method="post" enctype="multipart/form-data" action="">
             @csrf
             {{method_field('post')}}
         <div class="bottom">
@@ -53,7 +53,8 @@
 
         </div>
         </form>
-    </section>
-
-
+    </div>
+    </div>
 @endsection
+@include('layouts.webAside')
+@include('layouts.webFooter')

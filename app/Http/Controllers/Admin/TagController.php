@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Instapost;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Hekmatinasser\Verta\Verta;
 
-class InstapostController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class InstapostController extends Controller
      */
     public function index()
     {
-        $instaposts = Instapost::latest()->paginate(2);
-        return view('admin.instapost.index',compact('instaposts'));
+        $tags = Tag::latest()->paginate(2);
+        return view('admin.tag.index',compact('tags'));
     }
 
     /**
@@ -26,7 +27,7 @@ class InstapostController extends Controller
      */
     public function create()
     {
-        return view('admin.instapost.create');
+        return view('admin.tag.create');
     }
 
     /**
@@ -38,24 +39,23 @@ class InstapostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'url'=>'required|unique:instaposts'
+            'name' => 'required|unique:tags'
         ]);
 
-        Instapost::create([
-            'url'=> $request->url,
-            'post_id'=> $request->post_id
+        Tag::create([
+            'name'=>$request->name,
         ]);
+        return back()->with('msg','برچسب مورد نظر با موفقیت افزوده شد ');
 
-        return back()->with('msg','اطلاعات با موفقیت ذخیره شد');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Instapost  $instapost
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Instapost $instapost)
+    public function show(Tag $tag)
     {
         //
     }
@@ -63,46 +63,42 @@ class InstapostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Instapost  $instapost
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Instapost $instapost)
+    public function edit(Tag $tag)
     {
-        return view('admin.instapost.edit',compact('instapost'));
+        return view('admin.tag.edit',compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Instapost  $instapost
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Instapost $instapost)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
-            'url'=>'required|unique:instaposts'
+            'name'=>'required|unique:tags'
         ]);
-
-        $instapost->update([
-            'url'=> $request->url,
-            'post_id'=> $request->post_id
+        $tag->update([
+            'name'=>$request->name
         ]);
-        return redirect(route('instapost.index'))->with('msg','اطلاعات با موفقیت ویرایش شد');
+        return redirect(route('tag.index'))->with('msg','برچسب مورد نظر با موفقیت ویرایش شد ');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Instapost  $instapost
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Instapost $instapost)
+    public function destroy(Tag $tag)
     {
-        $instapost->delete();
-
-        return back()->with('msg','اطلاعات با موفقیت حذف شد');
-
+        $tag->delete();
+        return back()->with('msg','برچسب مورد نظر با موفقیت حذف شد ');
     }
 }

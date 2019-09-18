@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Instapost extends Model
+class Tag extends Model
 {
     protected $fillable=[
-        'url','post_id'
+        'name'
     ];
 }

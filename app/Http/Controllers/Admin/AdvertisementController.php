@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Advertisement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Hekmatinasser\Verta\Verta;
 
-class AdvertisementController extends Controller
+class AdvertisementController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,8 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        //
+        $ads = Advertisement::latest()->paginate(2);
+        return view('admin.advertisement.index',compact('ads'));
     }
 
     /**
@@ -25,7 +27,7 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.advertisement.create');
     }
 
     /**
@@ -36,7 +38,17 @@ class AdvertisementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'url'=> 'required|unique:advertisements',
+            'image'=> 'required'
+        ]);
+        $imgUrl = $this->imageuploader($request->image);
+        Advertisement::create([
+            'url'=>$request->url,
+            'image'=>$imgUrl
+        ]);
+
+        return back()->with('msg','اطلاعات با موفقیت ذخیره شد');
     }
 
     /**
@@ -58,7 +70,7 @@ class AdvertisementController extends Controller
      */
     public function edit(Advertisement $advertisement)
     {
-        //
+        return view('admin.advertisement.edit',compact('advertisement'));
     }
 
     /**
@@ -70,7 +82,21 @@ class AdvertisementController extends Controller
      */
     public function update(Request $request, Advertisement $advertisement)
     {
-        //
+        $request->validate([
+            'url' => 'required|unique:advertisements'
+        ]);
+        if ($request->image == ""){
+            $imgUrl = $advertisement->image;
+        }else{
+            $imgUrl = $this->imageuploader($request->image);
+        }
+
+        $advertisement->update([
+            'image'=> $imgUrl,
+            'url' => $request->url
+        ]);
+        return redirect(route('advertisement.index'))->with('msg','اطلاعات با موفقیت ویرایش شد');
+
     }
 
     /**
@@ -81,6 +107,7 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
-        //
+        $advertisement->delete();
+        return back()->with('msg','اطلاعات با موفقیت حذف شد');
     }
 }

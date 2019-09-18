@@ -153,13 +153,16 @@ desired effect
                         <a href="{{url(route('comment.index'))}}"><i class="fa fa-comment"></i> <span>کامنت ها</span></a>
                     </li>
                     <li class="treeview">
-                        <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>تبلیغات</span> </a>
+                        <a href="{{url(route('advertisement.index'))}}"><i class="fa fa-comment"></i> <span>تبلیغات</span> </a>
                     </li>
                     <li class="treeview">
-                        <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>پست های اینستاگرامی</span></a>
+                        <a href="{{url(route('instapost.index'))}}"><i class="fa fa-comment"></i> <span>پست های اینستاگرامی</span></a>
                     </li>
                     <li class="treeview">
-                        <a href="index.php?c=comment&a=index"><i class="fa fa-comment"></i> <span>درباره من</span> </a>
+                        <a href="{{url(route('tag.index'))}}"><i class="fa fa-circle"></i> <span> برچسب ها </span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{url(route('about.index'))}}"><i class="fa fa-comment"></i> <span>درباره من</span> </a>
                     </li>
                     <li>
                             <a href="{{route("adminLogout")}}" style="color: #f94877"><i class="fa fa-square"></i> <span>خروج</span></a>

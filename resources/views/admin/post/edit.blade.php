@@ -56,7 +56,30 @@
                 <hr>
                 <div class="form-group">
                     <label for="exampleInputEmail1">تگ ها</label>
-                    <input type="text" class="form-control" name="tags"   value="{{$post->tags}}">
+                    <?php
+                        $tags = \App\Tag::all();
+                        $tags_ = explode(',',$post->tags);
+                        $num = count($tags_);
+                    foreach ($tags as $tag){
+                        for ($i=0;$i<$num;$i++){
+                    ?>
+                    <div class="form-check">
+                        <input class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->name}}" id="defaultCheck1" multiple
+                        <?php
+                            if ($tags_[$i]==$tag){
+                                echo "checked";
+                            }
+                        ?>
+                        >
+                        <label class="form-check-label" for="defaultCheck1">
+                            {{$tag->name}}
+                        </label>
+                    </div>
+
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <hr>
                 <div class="form-group">

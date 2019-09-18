@@ -45,9 +45,16 @@ Route::prefix('admin')->group(function (){
         return view('admin.post.detail',compact('detail'));
     })->name('postDetail');
     Route::resource('/comment','Admin\CommentController');
+    Route::resource('/tag','Admin\TagController');
+    Route::resource('/about','Admin\AboutController');
+    Route::get('about/detail/{detail}',function (\App\About $detail){
+        return view('admin.about.detail',compact('detail'));
+    })->name('aboutDetail');
+    Route::resource('/advertisement','Admin\AdvertisementController');
+    Route::resource('/instapost','Admin\InstapostController');
 
 });
 
 Route::get('/test',function (){
-   return view('home');
+   return view('login');
 });

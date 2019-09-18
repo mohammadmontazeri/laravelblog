@@ -37,6 +37,7 @@ class PostController extends AdminController
      */
     public function store(Request $request)
     {
+       // return $request;
             $request->validate([
             'title' => 'required|unique:posts',
             'cat_id' => 'required',
@@ -51,7 +52,7 @@ class PostController extends AdminController
             'cat_id' => $request->cat_id,
             'summery' => $request->summery,
             'detail' => $request->detail,
-            'tags' => $request->tags,
+            'tags' => implode($request->tags,','),
             'image'=> $imgUrl
         ]);
         return back()->with('msg','پست مورد نظر با موفقیت افزوده شد ');
