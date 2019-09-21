@@ -65,6 +65,7 @@
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+            {{$posts->links()}}
         </div>
     </div>
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Like;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -13,4 +15,6 @@ class AdminController extends Controller
         $file->move($path,$filename);
         return "/uploads/".$filename;
     }
+
+
 }

@@ -1,4 +1,10 @@
-
+<?php
+$about = \App\About::all()->first();
+$cats = \App\Category::all()->random(4);
+$posts = \App\Post::latest()->paginate(4);
+$ads = \App\Advertisement::all()->last();
+$insta = \App\Instapost::latest()->paginate(3);
+?>
 
 <section class="section blog-area" style="margin-top: 250px;">
     <div class="container">
@@ -8,135 +14,114 @@
                 <div class="sidebar-area">
 
                     <div class="sidebar-section about-author center-text">
-                        <div class="author-image"><img src="{{asset('public/dist/img/avatar.png')}}" alt="Autohr Image"></div>
+                        <div class="author-image"><img src="{{asset("public/$about->image")}}" alt="Autohr Image"></div>
 
-                        <ul class="social-icons">
-                            <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
-                        </ul><!-- right-area -->
+                        <h4 class="author-name"><b class="light-color">{{$about->name}}</b></h4>
+                        <p style="font-family: main, sans-serif"><?php
+                            $sum = substr($about['detail'],0,201);
+                            echo $summery = $sum."...";
+                            ?></p>
 
-                        <h4 class="author-name"><b class="light-color">Cristine Smith</b></h4>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            dolore magnam aliquam quaerat voluptatem.</p>
-
-                        <div class="signature-image"><img src="images/signature-image.png" alt="Signature Image"></div>
-                        <a class="read-more-link" href="#"><b>READ MORE</b></a>
+                        <a class="read-more-link" href="#" style="font-family: main, sans-serif"><b>درباره من بیشتر بدانید</b></a>
 
                     </div><!-- sidebar-section about-author -->
 
                     <div class="sidebar-section src-area">
-
-                        <form action="post">
-                            <input class="src-input" type="text" placeholder="Search">
-                            <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                        </form>
+                        @if(session('search_msg'))
+                            <label for="" style="color: #f0004c">{{session('search_msg')}}</label>
+                        @endif
+                        <div class="src-area" style="width: 100%">
+                            <form action="{{route('search')}}" method="post">
+                                @csrf
+                                <input name="search"  type="text" placeholder="پست مورد نظرتان را از اینجا بیابید ..."
+                                       style="font-family: main, sans-serif;direction: rtl">
+                                <button class="src-btn" type="submit"><i style="color: #f0004c;font-size: 1.5em;font-weight: bold" class="ion-ios-search-strong"></i></button>
+                            </form>
+                        </div><!-- src-area -->
 
                     </div><!-- sidebar-section src-area -->
 
                     <div class="sidebar-section newsletter-area">
-                        <h5 class="title"><b>Subscribe to our newsletter</b></h5>
+                        <h5 class="title"><b>با ارسال ایمیل عضو خبرنامه سایت شوید</b></h5>
                         <form action="post">
-                            <input class="email-input" type="text" placeholder="Your email here">
-                            <button class="btn btn-2" type="submit">SUBSCRIBE</button>
+                            <input class="email-input" type="text" placeholder="ایمیل خود را وارد کنید">
+                            <button class="btn btn-2" type="submit">ارسال</button>
                         </form>
                     </div><!-- sidebar-section newsletter-area -->
 
                     <div class="sidebar-section category-area">
-                        <h4 class="title"><b class="light-color">Categories</b></h4>
-                        <a class="category" href="#">
-                            <img src="images/category-1-400x150.jpg" alt="Category Image">
-                            <h6 class="name">TRAVEL</h6>
-                        </a>
+                        <h4 class="title"><b class="light-color">دسته بندی ها</b></h4>
+                        @foreach($cats as $cat)
 
-                        <a class="category" href="#">
-                            <img src="images/category-2-400x150.jpg" alt="Category Image">
-                            <h6 class="name">FASHION</h6>
-                        </a>
-
-                        <a class="category" href="#">
-                            <img src="images/category-3-400x150.jpg" alt="Category Image">
-                            <h6 class="name">LIFESTYLE</h6>
-                        </a>
-                        <a class="category" href="#">
-                            <img src="images/category-4-400x150.jpg" alt="Category Image">
-                            <h6 class="name">DESIGN</h6>
-                        </a>
+                            <a class="category" href="{{url(route('showPosts',['id'=>$cat->id]))}}">
+                                <img src="{{asset("public/$cat->image")}}" alt="Category Image">
+                                <h6 class="name">{{$cat->name}}</h6>
+                            </a>
+                            @endforeach
                     </div><!-- sidebar-section category-area -->
 
                     <div class="sidebar-section latest-post-area">
-                        <h4 class="title"><b class="light-color">Latest Posts</b></h4>
+                        <h4 class="title"><b class="light-color">آخرین پست ها</b></h4>
 
-                        <div class="latest-post" href="#">
-                            <div class="l-post-image"><img src="images/recent-post-1-150x200.jpg" alt="Category Image"></div>
-                            <div class="post-info">
-                                <a class="btn category-btn" href="#">TRAVEL</a>
-                                <h5><a href="#"><b class="light-color">One more night in the clubs</b></a></h5>
-                                <h6 class="date"><em>Monday, October 13, 2017</em></h6>
+                        @foreach($posts as $post)
+                            <?php
+                            //$cat = \App\Category::where('id','=',$post->cat_id)->first();
+                                $cat = $post->category;
+                            ?>
+                            <div class="latest-post" href="#">
+                                <div class="l-post-image"><img src="{{asset("public/$cat->image")}}" alt="Category Image"></div>
+                                <div class="post-info">
+                                    <a class="btn category-btn" href="#"><?php
+                                     echo $cat->name;
+                                        ?></a>
+                                    <h5><a href="#"><b class="light-color">{{$post->title}}</b></a></h5>
+                                    <h6 class="date"><em><?php
+                                            $v = new Verta($post->created_at);
+                                            $v = \Hekmatinasser\Verta\Verta::instance($post->created_at);
+                                            $v = \Hekmatinasser\Verta\Verta::persianNumbers($v);
+                                            echo $v;
+                                            ?>
+                                            </em></h6>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="latest-post" href="#">
-                            <div class="l-post-image"><img src="images/recent-post-2-150x200.jpg" alt="Category Image"></div>
-                            <div class="post-info">
-                                <a class="btn category-btn" href="#">TRAVEL</a>
-                                <h5><a href="#"><b class="light-color">Travel lights in winter</b></a></h5>
-                                <h6 class="date"><em>Monday, October 13, 2017</em></h6>
-                            </div>
-                        </div>
-                        <div class="latest-post" href="#">
-                            <div class="l-post-image"><img src="images/recent-post-3-150x200.jpg" alt="Category Image"></div>
-                            <div class="post-info">
-                                <a class="btn category-btn" href="#">TRAVEL</a>
-                                <h5><a href="#"><b class="light-color">How to travel with no money</b></a></h5>
-                                <h6 class="date"><em>Monday, October 13, 2017</em></h6>
-                            </div>
-                        </div>
-
-                        <div class="latest-post" href="#">
-                            <div class="l-post-image"><img src="images/recent-post-4-150x200.jpg" alt="Category Image"></div>
-                            <div class="post-info">
-                                <a class="btn category-btn" href="#">TRAVEL</a>
-                                <h5><a href="#"><b class="light-color">Smile 10 times a day</b></a></h5>
-                                <h6 class="date"><em>Monday, October 13, 2017</em></h6>
-                            </div>
-                        </div>
+                            @endforeach
 
                     </div><!-- sidebar-section latest-post-area -->
 
                     <div class="sidebar-section advertisement-area">
-                        <h4 class="title"><b class="light-color">Advertisement</b></h4>
-                        <a class="advertisement-img" href="#">
-                            <img src="images/advertise-1-400x500.jpg" alt="Advertisement Image">
-                            <h6 class="btn btn-2 discover-btn">DISCOVER</h6>
+                        <h4 class="title"><b class="light-color">تبلیغات</b></h4>
+                        <a class="advertisement-img" href="{{url($ads->url)}}">
+                            <img src="{{asset("public/$ads->image")}}" alt="Advertisement Image">
+                            <h6 class="btn btn-2 discover-btn">مشاهده</h6>
                         </a>
                     </div><!-- sidebar-section advertisement-area -->
-
                     <div class="sidebar-section instagram-area">
-                        <h4 class="title"><b class="light-color">Instagram</b></h4>
+                        <h5 class="title"><b class="light-color">آخرین پست های قرار داده شده در اینستاگرام</b></h5>
                         <ul class="instagram-img">
-                            <li><a href="#"><img src="images/instragram-side-1-150x150.jpg" alt="Instagram Image"></a></li>
-                            <li><a href="#"><img src="images/instragram-side-2-150x150.jpg" alt="Instagram Image"></a></li>
-                            <li><a href="#"><img src="images/instragram-side-3-150x150.jpg" alt="Instagram Image"></a></li>
+                            <?php
+                            foreach($insta as $value){
+                                $imgUrl = $value->post->image;
+                                ?>
+                                <li><a href="{{$value->url}}"><img src="{{asset("public/$imgUrl")}}" alt="Instagram Image"></a></li>
+                               <?php
+                               }
+                               ?>
                             <div class="clearfix"></div>
-                            <li><a href="#"><img src="images/instragram-side-4-150x150.jpg" alt="Instagram Image"></a></li>
-                            <li><a href="#"><img src="images/instragram-side-5-150x150.jpg" alt="Instagram Image"></a></li>
-                            <li><a href="#"><img src="images/instragram-side-6-150x150.jpg" alt="Instagram Image"></a></li>
                         </ul>
                     </div><!-- sidebar-section instagram-area -->
 
                     <div class="sidebar-section tags-area">
                         <h4 class="title"><b class="light-color">تگ ها</b></h4>
                         <ul class="tags">
-                            <li><a class="btn" href="#">طراحی</a></li>
-                            <li><a class="btn" href="#">fasinon</a></li>
-                            <li><a class="btn" href="#">travel</a></li>
-                            <li><a class="btn" href="#">music</a></li>
-                            <li><a class="btn" href="#">video</a></li>
-                            <li><a class="btn" href="#">photography</a></li>
-                            <li><a class="btn" href="#">adventure</a></li>
+                            <?php
+                            $tags = \App\Tag::all();
+                            foreach ($tags as $tag){
+                                ?>
+                                <li><a class="btn" href="#">{{$tag->name}}</a></li>
+                            <?php
+                            }
+                            ?>
+
                         </ul>
                     </div><!-- sidebar-section tags-area -->
 

@@ -162,6 +162,9 @@ desired effect
                         <a href="{{url(route('tag.index'))}}"><i class="fa fa-circle"></i> <span> برچسب ها </span></a>
                     </li>
                     <li class="treeview">
+                        <a href="{{url(route('newsletter.index'))}}"><i class="fa fa-comment"></i> <span>خبرنامه</span> </a>
+                    </li>
+                    <li class="treeview">
                         <a href="{{url(route('about.index'))}}"><i class="fa fa-comment"></i> <span>درباره من</span> </a>
                     </li>
                     <li>

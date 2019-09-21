@@ -1,14 +1,9 @@
-@extends('layouts.web')
+@include('layouts.webHeader')
 
 @section('content')
-    @if(isset($query))
-        <div class="alert alert-success" role="alert">
-            ثبت نام <?php
-            echo $query;
-            ?> با موفقیت انجام شد
-        </div>
+    @if(session('msg'))
+        <label style="color: #f0004c">{{session('msg')}}</label>
     @endif
-
     <section class="reg_part">
         <div class="top">
           <span>
@@ -25,9 +20,9 @@
                   مشخصات کاربر
               </span>
             <div class="member_char_box">
-                <form action="{{route('register',['status'=>'UserPanel'])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('adminPostRegister',['q'=>'user'])}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    {{method_field('post')}}
+                    {{method_field('POST')}}
                     <div class="user_char">
                       <span>
                           آدرس ایمیل
@@ -77,12 +72,12 @@
                         ثبت نام
                     </button>
                     <span class="login_link">
-                      قبلا عضو شده اید؟ <a href="{{route('user_login')}}">ورود</a>
+                      قبلا عضو شده اید؟ <a href="{{url(route('login'))}}">ورود</a>
                   </span>
                 </form>
             </div>
         </div>
     </section>
-
-
 @endsection
+@include('layouts.webAside')
+@include('layouts.webFooter')

@@ -89,7 +89,6 @@ class InstapostController extends Controller
             'post_id'=> $request->post_id
         ]);
         return redirect(route('instapost.index'))->with('msg','اطلاعات با موفقیت ویرایش شد');
-
     }
 
     /**

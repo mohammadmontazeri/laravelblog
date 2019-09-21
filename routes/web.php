@@ -15,12 +15,18 @@ Route::prefix('admin')->middleware('auth:web')->group(function (){
         return view('admin.home');
     });
 });
-Route::prefix('admin')->group(function (){
+Route::group(['prefix'=>'admin'],function (){
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('adminLogin');
     Route::post('login', 'Auth\LoginController@login')->name('adminPostLogin');
     Route::get('logout', function (){
         \Illuminate\Support\Facades\Auth::logout();
-        return redirect('/admin/login')->with('msg','شما با موفقیت خارج شدید');
+        if (isset($_GET['q'])){
+            if ($_GET['q'] == 'user'){
+                return redirect(route('index'))->with('msg','شما با موفقیت خارج شدید');
+            }
+        }else{
+            return redirect('/admin/login')->with('msg','شما با موفقیت خارج شدید');
+        }
     })->name('adminLogout');
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('adminRegister');
     Route::post('register', 'Auth\RegisterController@register')->name('adminPostRegister');
@@ -52,9 +58,27 @@ Route::prefix('admin')->group(function (){
     })->name('aboutDetail');
     Route::resource('/advertisement','Admin\AdvertisementController');
     Route::resource('/instapost','Admin\InstapostController');
-
+    Route::resource('/newsletter','Admin\NewsletterController');
 });
+Route::get('/',function (){
+    return view('index');
+})->name('index');
+Route::get('/register', function (){
+    return view('register');
+})->name('register');
+Route::get('/login', function (){
+    return view('login');
+})->name('login');
+Route::post('/login','Auth\LoginController@authenticate')->name('userLogin');
+Route::get('/posts/{id}',function (\App\Category $id){
+    return view('category.posts',compact('id'));
+})->name('showPosts');
+Route::post('/search','Admin\PostController@search')->name('search');
+Route::post('/ajax','Admin\LikeController@ajaxLike')->name('ajaxLike');
 
-Route::get('/test',function (){
-   return view('login');
-});
+Route::get('/detail/{post}','PostController@index')->name('postDetail');
+/*
+Route::get('/a',function (){
+    return view('post.detail');
+});*/
+

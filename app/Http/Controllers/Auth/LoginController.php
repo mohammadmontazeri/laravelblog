@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -30,6 +31,24 @@ class LoginController extends Controller
     {
             return "/admin";
 
+    }
+    public function authenticate(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+        $credentials = $request->only('email','password');
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            if (auth()->user()->status == 0){
+                Auth::logout();
+                return redirect()->route('login')->with('msg','اکانت شما هنوز تایید نشده است');
+            }
+            return redirect()->route('index');
+        }else{
+            return redirect()->back()->with('msg','کاربر مورد نظر یافت نشد');
+        }
     }
     /**
      * Create a new controller instance.

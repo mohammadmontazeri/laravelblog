@@ -1,0 +1,709 @@
+
+@media (max-width:1300px){
+header{
+        display: none;
+}
+.header{
+    display: block;
+}
+.dore .right .topright .bottom .with_login span a{
+    font-size: 0.9em;
+}
+.all_dore_part{
+    height: 1350px;
+}
+.all_dore_part .item{
+    width: 98%;
+}
+.all_dore_part .item .subitem{
+    width: 32.5%;
+}
+}
+
+@media (max-width:1199px){
+.signinholder .signin .top h4{
+    font-size: 0.8em;
+    margin-right: 25%;
+}
+.signinholder .signin .top span{
+    font-size: 0.7em;     
+}      
+.signinholder .signin form .email{
+    flex-direction: column;
+}
+.signinholder .signin form .password{
+    flex-direction: column;
+}
+.loginholder .login .top h4{
+    font-size: 0.8em;
+    margin-right: 25%;
+}
+.loginholder .login .top span{
+    font-size: 0.7em;     
+}      
+.loginholder .login form .email{
+    flex-direction: column;
+}
+.loginholder .login form .password{
+    flex-direction: column;
+}
+.video_item{
+    width: 50%;
+    height: auto;
+}
+.video_item .item{
+    height: auto;
+    flex-direction: column;
+}
+.video_item .item .subitem{
+    width: 85%;
+    height: 400px;
+    margin: auto;
+    margin-top: 2%;
+}
+.article_item{
+    width: 50%;
+    height: auto;
+}
+.article_item .item{
+    height: auto;
+    flex-direction: column;
+}
+.article_item .item .subitem{
+    width: 85%;
+    height: 400px;
+    margin: auto;
+    margin-top: 2%;
+} 
+ 
+.dore{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.dore .right{
+    width: 100%;
+    height: auto;
+}
+.dore .left{
+    width: 100%;
+}
+.dore .right .topright{
+    height: auto;
+}
+.dore .right .topright .middle{
+    height: auto;
+}
+.dore .right .topright .middle ul li{
+    padding: 1% 0;
+}
+.dore .right .topright .bottom{
+    height: auto;
+}
+.dore .right .support{
+    margin: 1% 0;
+}
+.user_panel_default .panel_content .right ul li a{
+    font-size: 0.9em;
+}
+.user_panel_basket .panel_content .right ul li a{
+    font-size: 0.9em;
+}
+.user_panel_change .panel_content .right ul li a{
+    font-size: 0.9em;
+}
+.all_dore_part{
+    width: 90%;
+    height:  1700px;
+}
+.all_dore_part .item{
+    width: 75%;
+}
+.all_dore_part .item .subitem{
+    width: 49%;
+}
+}
+
+@media (max-width:991px){
+
+.all_dore_part .item{
+    width: 90%;
+}
+.user_panel_default .title h2 {
+    font-size: 1.3em;
+}
+.user_panel_default .panel_content{
+    flex-direction: column;
+}
+.user_panel_default .panel_content .right{
+    width: 75%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.user_panel_default .panel_content .left{
+    margin: auto;
+    width: 90%;
+}
+.user_panel_basket .title h2 {
+    font-size: 1.3em;
+}
+.user_panel_basket .panel_content{
+    flex-direction: column;
+}
+.user_panel_basket .panel_content .right{
+    width: 75%;
+    height: auto;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.user_panel_basket .panel_content .left{
+    margin: auto;
+    width: 100%;
+}
+.user_panel_change .title h2 {
+    font-size: 1.3em;
+}
+.user_panel_change .panel_content{
+    flex-direction: column;
+}
+.user_panel_change .panel_content .right{
+    width: 75%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.user_panel_change .panel_content .left{
+    margin: auto;
+    width: 90%;
+}
+.dore .left .title{
+    font-size: 1.1em;
+}
+.dore .left .top_text{
+    font-size: 0.9em;
+}
+.video_item{
+    width: 95%;
+    height: auto;
+}
+.video_item .item{
+    height: auto;
+    flex-direction: column;
+    justify-content: none;
+    padding-bottom: 50px;
+}
+
+.article_item{
+    width: 95%;
+    height: auto;
+    padding-bottom: 50px;
+}
+.article_item .item{
+    height: auto;
+    flex-direction: column;
+}
+
+.footeritem .center{
+    width: 65%;
+}
+.footeritem .center form .search input{
+    width: 75%;
+    height: 36px;
+    font-size: 0.8em;
+}
+.footeritem .center form .search button{
+    width: 25%;
+    height: 36px;
+}
+.copyright p{
+    font-size: 0.8em;
+}
+.header .headeritem .middlepart img{
+    width: 40%;
+}
+}
+@media (max-width:767px){
+.user_panel_default .panel_content .left .title h3{
+    font-size: 1.1em;
+}
+.user_panel_default .panel_content .left .main_content ul li {
+    font-size: 0.9em;
+}
+.user_panel_basket .panel_content .left .title h3{
+    font-size: 1.1em;
+}
+.user_panel_basket .panel_content .left .main_content .pro_list h5{
+    font-size: 0.75em;
+}
+.user_panel_basket .panel_content .left .main_content .pro_list span{
+    font-size: 0.9em;
+}
+.user_panel_basket .panel_content .left .main_content .complete_buy span,label{
+    font-size: 0.8em;
+}
+.user_panel_basket .panel_content .left .main_content .complete_buy form .off_code input{
+    width: 50%;
+}
+.user_panel_basket .panel_content .left .main_content .pro_list ul li{
+    width: 95%;
+    margin: auto;
+    margin-bottom: 4%;
+}
+.user_panel_change .panel_content .left .title h3{
+    font-size: 1.1em;
+}
+
+.user_panel_change .panel_content .left .main_content .email{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.user_panel_change .panel_content .left .main_content .password{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.dore .left .title{
+    font-size: 1em;
+}
+.dore .left .top_text{
+    font-size: 0.8em;
+}
+
+.dore{
+    width: 95%;
+}
+.dore .right .topright .middle ul li span span{
+    font-size: 0.8em;
+}
+.dore .right .support p{
+    font-size: 0.88em;
+}
+.all_dore_part{
+    width: 90%;
+    height:  3350px;
+}
+.all_dore_part .item{
+    width: 75%;
+}
+.all_dore_part .item .subitem{
+    width: 95%;
+    margin: auto;
+    margin-bottom: 2%;
+}
+.signinholder .signin{
+    width: 75%;
+}
+.loginholder .login{
+    width: 75%;
+}
+.slider .content .top p{
+    font-size: 2.8em;
+}
+.slider .content .middle p{
+    font-size: 1.1em;
+}
+.video_item{
+    width: 80%;
+    height: auto;
+}
+.video_item .item{
+    height: auto;
+    flex-direction: column;
+    justify-content:none;
+}
+
+.video_item .item  .subitem{
+    width: 90%;
+    height: auto;
+    margin: auto;
+    margin-top: 3%;
+}
+.video_item .title_part{
+    width: 98%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.title_dore .title_container span{
+    font-size: .7em;
+}
+.title_dore .title_container h1{
+    text-align: center;
+    font-size: .9em;
+}
+.video_item .title_part #right{
+    text-align: center;
+    font-size: 0.95em;
+}
+.video_item .title_part #left{
+    text-align: center;
+    font-size: 0.95em;
+}
+.article_item{
+    width: 80%;
+    height: auto;
+}
+.article_item .item{
+    height: auto;
+    flex-direction: column;
+    justify-content:none;
+}
+.article_item .item  .subitem{
+    width: 90%;
+    height: auto;
+    margin: auto;
+    margin-top: 3%;
+}
+.article_item .title_part{
+    width: 98%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.article_item .title_part #right{
+    text-align: center;
+    font-size: 0.95em;
+}
+.article_item .title_part #left{
+    text-align: center;
+    font-size: 0.95em;
+}
+
+.table ul li .episode .ep_num{
+  display: none;
+}
+.table ul li .episode .ep_title{
+    width: 45%;
+    font-size: .9em;
+}
+.table ul li .episode a{
+    width: 25%;
+    font-size: .8em;
+}
+.table ul li .episode .pay_down{
+    width: 25%;
+    font-size: .8em;
+}
+.table ul li .episode .ep_time{
+    width: 25%;
+}
+.hidden_sitegardi ul li a{
+    font-size: 0.8em;
+}
+.hidden_menu ul li a{
+    font-size: 0.8em;
+}
+.footer{
+    flex-direction: column;
+}
+.footer .right{
+    width: 98%;
+}
+.footer .left{
+    width: 98%;
+}
+.footeritem .center{
+    width: 75%;
+}
+.footeritem .center form .search input{
+    width: 75%;
+    height: 36px;
+    font-size: 0.8em;
+}
+.footeritem .center form .search button{
+    width: 25%;
+    height: 36px;
+}
+.copyright p{
+    font-size: 0.7em;
+}
+
+.header .headeritem .middlepart img{
+    width: 48%;
+}
+}
+
+@media (max-width:479px){
+.title_alldore{
+    height: 60px;
+}
+.title_alldore .title_container h1{
+    font-size: 0.95em;
+    line-height: 60px;
+}
+.all_dore_part{
+    width: 98%;
+}
+.all_dore_part .item{
+    width: 98%;
+}
+.all_dore_part .item .subitem{
+    width: 90%;
+}
+.user_panel_basket .panel_content .left .main_content .pro_list h5{
+    font-size: 0.6em;
+}
+.user_panel_basket .panel_content .left .main_content .pro_list span{
+    font-size: 0.65em;
+}
+.user_panel_basket .panel_content .left .main_content .pro_list ul li .delete_pro .del_basket_resp{
+    display: block;
+}
+.user_panel_basket .panel_content .left .main_content .pro_list ul li .delete_pro .del_basket{
+    display: none;
+}
+.user_panel_basket .panel_content .left .main_content .complete_buy form .btn_complete button{
+    font-size: 0.85em;
+}
+.user_panel_basket .panel_content .left .main_content .complete_buy form .off_code input{
+    font-size: 1em;
+}
+.signinholder .signin{
+    width: 95%;
+}
+.loginholder .login{
+    width: 95%;
+}
+.slider .content .top{
+    margin-top: 80px;
+}
+.slider .content .middle p{
+    font-size: 0.95em;
+}  
+.video_item .title_part #right{
+    font-size: 0.9em;
+}
+.video_item .title_part #left{
+    font-size: 0.9em;
+}
+.video_item{
+    width: 98%;
+    height: auto;
+}
+.video_item .item{
+    width: 98%;
+}
+.video_item .item  .subitem{
+    width: 100%;
+}
+.video_item .item .subitem .content .title{
+    font-size: 1em;
+}
+.video_item .item  .subitem .content .demo{
+    font-size: 0.7em;
+}
+.video_item .item  .subitem .video_time .sub_video_item p{
+    font-size: 0.8em;
+}
+.video_item .item  .subitem .video_time .sub_video_item span{
+    font-size: 0.8em;
+}
+.article_item .title_part #right{
+    font-size: 0.9em;
+}
+.article_item .title_part #left{
+    font-size: 0.9em;
+}
+.article_item{
+    width: 98%;
+    height: auto;
+}
+.article_item .item{
+    width: 98%;
+}
+.article_item .item  .subitem{
+    width: 100%;
+}
+.article_item .item  .subitem{
+    width: 100%;
+}
+.article_item .item  .subitem .content .title{
+    font-size: 1em;
+}
+.article_item .item  .subitem .content .demo{
+    font-size: 0.7em;
+}
+.article_item .item  .subitem .writer .sub_writer_item p{
+    font-size: 0.8em;
+}
+.article_item .item  .subitem .writer .sub_writer_item span{
+    font-size: 0.8em;
+}
+.hidden_sitegardi ul li a{
+    font-size: 0.75em;
+}
+.hidden_menu ul li a{
+    font-size: 0.75em;
+}
+.footeritem .center{
+    width: 85%;
+}
+.footeritem .center form .search input{
+    width: 75%;
+    height: 36px;
+    font-size: 0.7em;
+}
+.footeritem .center form .search button{
+    width: 25%;
+    height: 36px;
+    font-size: 0.9em;
+}
+.footer .right{
+    width: 98%;
+    flex-direction: column;
+    height: 500px;
+}
+.footer .left{
+    width: 98%;
+    flex-direction: column;
+    height: 500px;
+}
+.footer .right .video{
+    width: 98%;
+    margin: auto;
+    margin-top: 0.5%;
+}
+.footer .right .article{
+    width: 98%;
+    margin: auto;
+    margin-top: 0.5%;
+}
+.footer .left .aboutus{
+    width: 98%;
+    margin: auto;
+    margin-top: 0.5%;
+}
+.footer .left .properties{
+    width: 98%;
+    margin: auto;
+    margin-top: 0.5%;
+}
+.copyright p{
+    font-size: 0.75em;
+}
+.header .headeritem .middlepart img{
+    width: 55%;
+}
+}
+
+@media (max-width:370px){
+.all_dore_part{
+    width: 99%;
+}
+.all_dore_part .item{
+    width: 100%;
+}
+.all_dore_part .item .subitem{
+    width: 98%;
+}
+.all_dore_part .item  .subitem .content .demo{
+    font-size: 0.65em;
+}
+.all_dore_part .item  .subitem .video_time .sub_video_item span{
+    font-size: 0.8em;
+}
+.all_dore_part .item  .subitem .video_time .sub_video_item p{
+    font-size: 0.8em;
+}
+.dore .right .topright .bottom .with_login span a{
+    font-size: 0.8em;   
+}
+.dore .right .topright .middle ul li span span{
+    font-size: 0.77em;
+}
+.video_item .title_part #right{
+    font-size: 0.9em;
+}
+.video_item .title_part #left{
+    font-size: 0.9em;
+}
+.video_item{
+    width: 98%;
+    height: auto;
+}
+.video_item .item  .subitem{
+    width: 100%;
+}
+.video_item .item  .subitem .content .title{
+    font-size: 1em;
+}
+.video_item .item  .subitem .content .demo{
+    font-size: 0.7em;
+}
+.video_item .item  .subitem .video_time .sub_video_item p{
+    font-size: 0.8em;
+    line-height: 25px;
+}
+.video_item .item  .subitem .video_time .sub_video_item span{
+    font-size: 0.8em;
+    line-height: 25px;
+}
+.video_item .item  .subitem .video_time{
+    height: 25px;
+}
+.article_item .title_part #right{
+    font-size: 0.9em;
+}
+.article_item .title_part #left{
+    font-size: 0.9em;
+}
+.article_item{
+    width: 98%;
+    height: auto;
+}
+.article_item .item  .subitem{
+    width: 100%;
+}
+.article_item .item  .subitem .content .title{
+    font-size: 1em;
+}
+.article_item .item  .subitem .content .demo{
+    font-size: 0.7em;
+}
+.article_item .item  .subitem .writer .sub_writer_item p{
+    font-size: 0.8em;
+    line-height: 25px;
+}
+.article_item .item  .subitem .writer .sub_writer_item span{
+    font-size: 0.8em;
+    line-height: 25px;
+}
+.article_item .item  .subitem .writer{
+    height: 25px;
+}
+.footeritem .center{
+    width: 98%;
+}
+.footeritem .center form .search input{
+    width: 80%;
+    height: 36px;
+    font-size: 0.7em;
+}
+.footeritem .center form .search button{
+    width: 25%;
+    height: 36px;
+    font-size: 0.9em;
+}
+.copyright p{
+    font-size: 0.7em;
+}
+.header{
+    height: 65px;
+}
+.header .headeritem .middlepart img{
+    width: 75%;
+    height: 65px;
+}
+.header .headeritem .bars i{
+   font-size: 1.2em;
+}
+.header .headeritem .useraction i{
+   font-size: 1.2em;
+}
+}
+
+

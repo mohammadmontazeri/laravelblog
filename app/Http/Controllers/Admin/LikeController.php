@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Like;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
@@ -13,74 +14,33 @@ class LikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function ajaxLike(Request $request)
     {
-        //
-    }
+        if (Auth::check()){
+            $like = Like::where('user_id','=',Auth()->user()->id)->where('post_id','=',$request->post_id)->first();
+            if ($like){
+                $like->delete();
+                $likeNum = \App\Like::where('post_id','=',$request->post_id)->get();
+                $num = count($likeNum);
+                return response()->json([
+                    'delete',$num
+                ]);
+            }else{
+                Like::create([
+                    'post_id' => $request->post_id,
+                    'user_id' => Auth::user()->id
+                ]);
+                $likeNum = \App\Like::where('post_id','=',$request->post_id)->get();
+                $num = count($likeNum);
+                return response()->json([
+                    'add',$num
+                ]);
+            }
+        }else{
+            return response()->json('noAuth');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Like $like)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Like $like)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Like $like)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Like $like)
-    {
-        //
     }
 }

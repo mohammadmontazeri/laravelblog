@@ -118,4 +118,6 @@ class CategoryController extends AdminController
         $category->delete();
         return back()->with('msg','دسته مورد شما با موفقیت حذف شد');
     }
+
+
 }

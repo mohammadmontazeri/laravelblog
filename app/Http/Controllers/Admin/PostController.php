@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends AdminController
 {
@@ -46,6 +47,7 @@ class PostController extends AdminController
             'tags' => 'required',
             'image' => 'required',
         ]);
+          //  return $request;die;
         $imgUrl = $this->imageuploader($request->image);
         Post::create([
             'title' => $request->title,
@@ -155,6 +157,18 @@ class PostController extends AdminController
 
 //            @header('Content-type: text/html; charset=utf-8');
             echo $re;
+        }
+    }
+    /// User Side Functions
+    public function search(Request $request)
+    {
+        if ($request->search == ""){
+            $msg = "عبارتی را برای جستجو وارد نمایید";
+            return redirect(route('index'))->with('search_msg',$msg);
+        }else{
+            $posts = \App\Post::where('title','like',"%$request->search%")->latest()->paginate(1);
+            //return view('post.search',compact('posts'));
+            return redirect(route('index'))->with('posts',$posts);
         }
     }
 }
