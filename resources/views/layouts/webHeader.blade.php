@@ -54,7 +54,7 @@ use Hekmatinasser\Verta\Verta;
                 ?>
             </li>
             @if(\Illuminate\Support\Facades\Auth::check())
-                <li style="border:solid 1.2px #f0004c;border-radius: 2px;"><a href="{{url(route('register'))}}"> پنل کاربری </a> | <a href="{{url(route('adminLogout',['q'=>'user']))}}">خروج</a></li>
+                <li style="border:solid 1.2px #f0004c;border-radius: 2px;"><a href="#"> پنل کاربری </a> | <a href="{{url(route('adminLogout',['q'=>'user']))}}">خروج</a></li>
             @else
                 <li style="border:solid 1.2px #f0004c;border-radius: 2px;"><a href="{{url(route('register'))}}"> ثبت نام </a> | <a href="{{url(route('login'))}}">ورود</a></li>
             @endif
