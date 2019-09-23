@@ -29,11 +29,10 @@ Route::prefix('admin')->group(function (){
     Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('adminVerification.verify');
     Route::get('email/resend', 'Auth\VerificationController@resend')->name('adminVerification.resend');
 });
-
 Route::prefix('admin')->middleware('auth:web')->group(function (){
     Route::get('/', function () {
         return view('admin.home');
-    });
+    })->name('panel');
     Route::resource('/user','Admin\UserController');
     Route::post('/userSearch',function (\Illuminate\Http\Request $request){
         //$user = \Illuminate\Support\Facades\Auth::user();
@@ -62,6 +61,7 @@ Route::prefix('admin')->middleware('auth:web')->group(function (){
     Route::resource('/advertisement','Admin\AdvertisementController');
     Route::resource('/instapost','Admin\InstapostController');
     Route::resource('/newsletter','Admin\NewsletterController');
+    Route::resource('/contact','ContactController');
 });
 Route::get('/',function (){
     return view('index');
@@ -85,6 +85,13 @@ Route::get('/tag/{tag}',function (\App\Tag $tag){
     $posts = \App\Post::where('tags','like',"%$tag->name%")->latest()->paginate(1);
     return view('tag.showPost',compact('posts'),compact('tag'));
 })->name('showPostTag');
+Route::get('/contact-us',function (){
+    return view('contact.contact');
+})->name('contact');
+Route::post('/contact','ContactController@store')->name('contactStore');
+Route::get('/about-me',function (){
+    return view('about');
+})->name('about_me');
 /*
 Route::get('/mail',function (){
    \Illuminate\Support\Facades\Mail::to(\Illuminate\Support\Facades\Auth::user()->email)->send(new \App\Mail\authMail());

@@ -21,7 +21,9 @@
                         <form method="POST" action="{{ route('advertisement.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ثبت تبلیغ جدید') }}</label>
+                                <div class="col-md-8">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ثبت تبلیغ جدید') }}</label>
+                                </div>
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                            name="url" placeholder="آدرس تبلیغ جدید را وارد کنید ..." autocomplete="name"

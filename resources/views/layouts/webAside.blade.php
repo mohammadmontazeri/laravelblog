@@ -22,7 +22,7 @@ $insta = \App\Instapost::latest()->paginate(3);
                             echo $summery = $sum."...";
                             ?></p>
 
-                        <a class="read-more-link" href="#" style="font-family: main, sans-serif"><b>درباره من بیشتر بدانید</b></a>
+                        <a class="read-more-link" href="{{url(route('about_me'))}}" style="font-family: main, sans-serif"><b>درباره من بیشتر بدانید</b></a>
 
                     </div><!-- sidebar-section about-author -->
 

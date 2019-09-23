@@ -41,12 +41,9 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
         $credentials = $request->only('email','password');
+
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            if (auth()->user()->status == 0){
-                Auth::logout();
-                return redirect()->route('login')->with('msg','اکانت شما هنوز تایید نشده است');
-            }
             return redirect()->route('index');
         }else{
             return redirect()->back()->with('msg','کاربر مورد نظر یافت نشد');

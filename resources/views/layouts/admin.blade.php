@@ -167,6 +167,9 @@ desired effect
                     <li class="treeview">
                         <a href="{{url(route('about.index'))}}"><i class="fa fa-comment"></i> <span>درباره من</span> </a>
                     </li>
+                    <li class="treeview">
+                        <a href="{{url(route('contact.index'))}}"><i class="fa fa-comment"></i> <span>تماس با من</span> </a>
+                    </li>
                     <li>
                             <a href="{{route("adminLogout")}}" style="color: #f94877"><i class="fa fa-square"></i> <span>خروج</span></a>
                     </li>

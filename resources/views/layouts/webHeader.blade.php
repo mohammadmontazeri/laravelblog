@@ -20,6 +20,8 @@ use Hekmatinasser\Verta\Verta;
 
     <link href="{{asset('public/css/detailpost.css')}}" rel="stylesheet">
 
+    <link href="{{asset('public/css/styles.css')}}" rel="stylesheet">
+
     <link href="{{asset('public/common-css/bootstrap.css')}}" rel="stylesheet">
 
     <link href="{{asset('public/common-css/ionicons.css')}}" rel="stylesheet">
@@ -54,7 +56,15 @@ use Hekmatinasser\Verta\Verta;
                 ?>
             </li>
             @if(\Illuminate\Support\Facades\Auth::check())
-                <li style="border:solid 1.2px #f0004c;border-radius: 2px;"><a href="#"> پنل کاربری </a> | <a href="{{url(route('adminLogout',['q'=>'user']))}}">خروج</a></li>
+                <li style="border:solid 1.2px #f0004c;border-radius: 2px;">
+                    <?php
+                    if (Auth()->user()->role == "admin"){
+                        ?>
+                        <a href="{{url(route('panel'))}}"> پنل کاربری </a> |
+                    <?php
+                    }
+                    ?>
+                    <a href="{{url(route('adminLogout',['q'=>'user']))}}">خروج</a></li>
             @else
                 <li style="border:solid 1.2px #f0004c;border-radius: 2px;"><a href="{{url(route('register'))}}"> ثبت نام </a> | <a href="{{url(route('login'))}}">ورود</a></li>
             @endif
@@ -106,7 +116,7 @@ use Hekmatinasser\Verta\Verta;
                 </ul>
 
             </li>
-            <li><a href="#">تماس با من</a></li>
+            <li><a href="{{url(route('contact'))}}">تماس با من</a></li>
         </ul><!-- main-menu -->
 
     </div><!-- conatiner -->

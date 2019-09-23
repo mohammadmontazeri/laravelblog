@@ -15,7 +15,6 @@ class User extends Authenticatable
     protected $fillable= [
         'name','email','password','status'
     ];
-
     // Set Custom Slug For Module
 /*
     public function getRouteKeyName()

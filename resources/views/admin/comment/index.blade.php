@@ -59,13 +59,9 @@
                                 ?>
                             </td>
                             <td>
-                                <?php
-                                if (Auth()->user()->id == $comment->user_id){
-                                ?>
+
                                 <a class="label label-primary" href="{{url(route('comment.edit',['comment'=>$comment->id]))}}">ویرایش</a>
-                                <?php
-                                }
-                                ?>
+
                             </td>
                             <td>
                                 <form method="post" action="{{route('comment.destroy',['comment'=>$comment->id])}}">

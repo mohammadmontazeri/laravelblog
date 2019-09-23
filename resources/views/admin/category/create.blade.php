@@ -21,7 +21,10 @@
                         <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ثبت دسته جدید') }}</label>
+                                <div class="col-md-8">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ثبت دسته جدید') }}</label>
+                                </div>
+                                <br>
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                            name="name" placeholder="دسته بندی جدید را وارد کنید ..." autocomplete="name"
