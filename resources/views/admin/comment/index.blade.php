@@ -6,6 +6,9 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">لیست همه کامنت ها</h3>
+                    @if(session('msg'))
+                        <label style="color: #f0004c">{{session('msg')}}</label>
+                    @endif
                     <a class="label label-warning" href="{{url(route('comment.create'))}}" style="float: left;padding: 7px;">افزودن کامنت جدید</a>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -72,7 +75,7 @@
                                 </form>
                             </td>
                             <td>
-                                <a class="label label-info" href="">پاسخ بده </a></td>
+                                <a class="label label-info" href="{{url(route('replyComment',['id'=>$comment->id]))}}">پاسخ بده </a></td>
                         </tr>
 
                         <?php } ?>

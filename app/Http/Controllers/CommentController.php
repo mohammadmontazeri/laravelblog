@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Newsletter;
+use App\Comment;
+use App\Post;
+use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Hekmatinasser\Verta\Verta;
 
-class NewsletterController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,7 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        $newsletters = Newsletter::latest()->paginate(2);
-        return view('admin.newsletter.index',compact('newsletters'));
+        //
     }
 
     /**
@@ -36,26 +35,27 @@ class NewsletterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,User $user,Post $post)
     {
-        if ($request->email == ""){
-            return back()->with('newsMsg','ایمیل را برای ثبت کردن وارد کنید');
+        if ($request->text == ""){
+            return redirect(route('postDetail',['post'=>$post->id]))->with('msg','لطفا متن مورد نظرتان را پر کنید');
         }else{
-            Newsletter::create([
-                'email' => $request->email,
-                'status' => '0'
+            Comment::create([
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+                'text' => $request->text
             ]);
-            return back()->with('newsMsg','ایمیل شما برای دریافت خبر های سایت ثبت شد');
+            return redirect(route('postDetail',['post'=>$post->id]))->with('msg','پیفام شما بعد از بررسی نهایی در سایت ثبت خواهد شد');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Newsletter  $newsletter
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Newsletter $newsletter)
+    public function show(Comment $comment)
     {
         //
     }
@@ -63,10 +63,10 @@ class NewsletterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Newsletter  $newsletter
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Newsletter $newsletter)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -75,10 +75,10 @@ class NewsletterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Newsletter  $newsletter
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Newsletter $newsletter)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -86,10 +86,10 @@ class NewsletterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Newsletter  $newsletter
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Newsletter $newsletter)
+    public function destroy(Comment $comment)
     {
         //
     }

@@ -15,6 +15,12 @@ class PostController extends Controller
      */
     public function index(Post $post)
     {
+        $num = $post->viewed;
+        $viewed = $num + 1 ;
+
+        $post->update([
+            'viewed' => $viewed
+        ]);
         return view('post.detail',compact('post'));
     }
 

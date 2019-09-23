@@ -54,33 +54,43 @@
                 </textarea>
                 </div>
                 <hr>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">تگ ها</label>
-                    <?php
+                <div class="form-group" style="display: flex">
+                    <div style="border-left: solid 1px #ddd;padding-left: 20px">
+                        <label for="exampleInputEmail1" style="color: #f0004c"> تگ ها این پست</label>
+                        <?php
+                        $tags_ = explode(',',$post->tags);
+                        $num = count($tags_);
+                        foreach ($tags_ as $tag){
+                        ?>
+                        <div class="form-check">
+                            <label class="form-check-label" for="defaultCheck1">
+                                {{$tag}}
+                            </label>
+                        </div>
+
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <div style="padding-right: 20px;">
+                        <label for="exampleInputEmail1" style="color: #f0004c"> کلیه تگ ها</label>
+                        <?php
                         $tags = \App\Tag::all();
                         $tags_ = explode(',',$post->tags);
                         $num = count($tags_);
-                    foreach ($tags as $tag){
-                        for ($i=0;$i<$num;$i++){
-                    ?>
-                    <div class="form-check">
-                        <input class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->name}}" id="defaultCheck1" multiple
-                        <?php
-                            if ($tags_[$i]==$tag){
-                                echo "checked";
-                            }
+                        foreach ($tags as $tag){
                         ?>
-                        >
-                        <label class="form-check-label" for="defaultCheck1">
-                            {{$tag->name}}
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->name}}" id="defaultCheck1" multiple>
+                            <label class="form-check-label" for="defaultCheck1">
+                                {{$tag->name}}
+                            </label>
+                        </div>
 
-                    <?php
-
+                        <?php
                         }
-                    }
-                    ?>
+                        ?>
+                    </div>
                 </div>
                 <hr>
                 <div class="form-group">

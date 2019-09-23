@@ -49,7 +49,7 @@
                                }
                                 ?>
                                 </li>
-                            <li><a href="#"><i class="ion-android-textsms"></i>{{$post->viewed}}</a></li>
+                            <li><a href="#"><i class="ion-android-textsms"></i><?php echo count($post->comments)?></a></li>
                         </ul>
                     </div>
                     <p class="date" style="font-family: main, sans-serif"><em><?php

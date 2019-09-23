@@ -1,12 +1,11 @@
 @include('layouts.webHeader')
 @include('layouts.webSidebar')
 @section('content')
+
     <div class="col-lg-8 col-md-12">
         <div class="blog-posts">
-
             <div class="single-post">
                 <div class="image-wrapper"><img src="{{asset("public/$post->image")}}" alt="Blog Image"></div>
-
                 <div class="icons">
                     <div class="left-area">
                         <a class="btn caegory-btn" href="#"><b>{{$post->category->name}}</b></a>
@@ -31,7 +30,7 @@
                             }
                             ?>
                         </li>
-                        <li><a href="#"><i class="ion-android-textsms"></i></a></li>
+                        <li><a href="#"><i class="ion-android-textsms"></i><?php echo count($post->comments)?></a></li>
                     </ul>
                 </div>
                 <p class="date"><em>
@@ -45,65 +44,95 @@
                 <h3 class="title"><a href="#"><b class="light-color">{{$post->title}}</b></a></h3>
                 {!! $post->detail !!}
                 <ul>
-                    <li><a class="btn" href="#">design</a></li>
-                    <li><a class="btn" href="#">fashion</a></li>
+                    <?php
+                        $con = \App\Post::where('id','=',$post->id)->get()->first();
+                        $tags = explode(',',$con->tags);
+                        foreach ($tags as $tag){
+                    ?>
+                        <li><a class="btn" href="#">{{$tag}}</a></li>
+                    <?php
+                            }
+                     ?>
                 </ul>
 
             </div><!-- single-post -->
 
-            <div class="comments-area">
-                <h4 class="title"><b class="light-color">2 Comments</b></h4>
-                <div class="comment">
-                    <div class="author-image"><img src="images/author-2-150x150.jpg" alt="Autohr Image"></div>
-                    <div class="comment-info">
-                        <h5><b class="light-color">William Smith</b></h5>
-                        <h6 class="date"><em>Monday, October 30, 2017</em></h6>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            dolore magnam aliquam quaerat voluptatem.</p>
-                    </div>
-                </div><!-- comment -->
 
-                <div class="comment">
-                    <div class="author-image"><img src="images/author-3-150x150.jpg" alt="Autohr Image"></div>
-                    <div class="comment-info">
-                        <h5><b class="light-color">William Smith</b></h5>
-                        <h6 class="date"><em>Monday, October 30, 2017</em></h6>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            dolore magnam aliquam quaerat voluptatem.</p>
-                    </div>
-                </div><!-- comment -->
+                <h4 class="title"><b class="light-color">نظرات</b></h4>
+    <?php
 
-            </div><!-- comments-area -->
+                            function dateTime($input)
+                            {
+                                $v = new Verta($input->created_at);
+                                $v = \Hekmatinasser\Verta\Verta::instance($input->created_at);
+                                $v = \Hekmatinasser\Verta\Verta::persianNumbers($v);
+                                echo $v;
+                            }
+                            function parent($parent, $post_id)
+                            {
+                                $parents = \App\Comment::where('parent','=',$parent)->get();
+                                echo "<ul style='margin-right: 10px;display: flex;flex-direction: column'>";
 
-            <div class="leave-comment-area">
-                <h4 class="title"><b class="light-color">Leave a comment</b></h4>
-                <div class="leave-comment">
+                                foreach ($parents as $par) {
+                                    if ($par['status'] == "1") {
+                                        echo "<li style='list-style-type: none;border: solid .5px #aaa;padding: 8px 4px ;border-radius: 3px;background-color: #eeeeee;'>$par[text]<span class='label-danger' style='float: left;margin-left: 7px;padding: 2.5px 5px;font-size: .8em;border-radius: 2px;background-color: #f0004c;color: #fff;font-weight: bolder;'>" . $par->user->name . "</span>" . "</li><span style='color: #c87f0a;float: left;font-size: .7em;font-weight: bold;'>" . dateTime($par) . "</span>";
+                                        if ($par['is_parent'] == "1") {
+                                            parent($par['id'], $post_id);
+                                        }
+                                    }
+                                }
 
-                    <form method="post">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input class="name-input" type="text" placeholder="Name">
-                            </div>
-                            <div class="col-sm-6">
-                                <input class="email-input" type="text" placeholder="Email">
-                            </div>
-                            <div class="col-sm-12">
-                                <input class="subject-input" type="text" placeholder="Subject">
-                            </div>
-                            <div class="col-sm-12">
-                                <textarea class="message-input" rows="6" placeholder="Message"></textarea>
-                            </div>
-                            <div class="col-sm-12">
-                                <button class="btn btn-2"><b>COMMENT</b></button>
-                            </div>
 
-                        </div><!-- row -->
-                    </form>
+                                echo "</ul>";
+                            }
 
-                </div><!-- leave-comment -->
+                            function ch($comments, $post)
+                            {
+                                echo "<ul style='display:flex;flex-direction: column'>";
+                                foreach ($comments as $key => $item) {
+                                    if (($item['parent'] == "") && ($item['is_parent'] == "1") && ($item['status'] == "1")) {
+                                        echo "<li style='list-style-type: none;border: solid .5px #aaa;padding: 8px 4px ;border-radius: 3px;background-color: #FFF;'>$item[text]<span class='label-danger' style='float: left;margin-left: 7px;padding: 2.5px 5px;font-size: .8em;border-radius: 2px;background-color: #f0004c;color: #fff;font-weight: bolder;'>" . $item->user->name . "</span>" . "</li><span style='color: #c87f0a;float: left;font-size: .7em;font-weight: bold;'>" . dateTime($item) . "</span>";
+                                        parent($item['id'], $post['id']);
+                                    }
+                                    if (($item['parent'] == "") && ($item['is_parent'] == "0") && ($item['status'] == "1")) {
+                                        echo "<li style='list-style-type: none;border: solid .5px #aaa;padding: 8px 4px ;border-radius: 3px;background-color: #FFF;'>$item[text]<span class='label-danger' style='float: left;margin-left: 7px;padding: 2.5px 5px;font-size: .8em;border-radius: 2px;background-color: #f0004c;color: #fff;font-weight: bolder;'>" . $item->user->name . "</span>" . "</li><span style='color: #c87f0a;float: left;font-size: .7em;font-weight: bold;'>" . dateTime($item) . "</span>";
+                                    }
+                                }
+                                echo "</ul>";
+                            }
+                            ch($post->comments, $post);
 
-            </div><!-- comments-area -->
+                            ?>
 
+
+            @if(\Illuminate\Support\Facades\Auth::check())
+                @if(session('msg'))
+                    <label style="color: #fff; background-color: #9f191f;border-radius: 2px;padding: 3px;">{{session('msg')}}</label>
+                    @endif
+                <div class="leave-comment-area">
+                    <h4 class="title"><b class="light-color">ثبت نظرات</b></h4>
+                    <div class="leave-comment">
+                        <form method="post" action="{{route('commentStore',['user_id'=>Auth()->user()->id,'post_id'=>$post->id])}}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <textarea name="text" class="message-input" rows="6" style="font-family: main, sans-serif" placeholder="متن مورد نظر مورد را  از اینجا وارد کنید..."></textarea>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button class="btn btn-2" style="font-family: main, sans-serif"><b>ثبت و ارسال </b></button>
+                                </div>
+                            </div><!-- row -->
+                        </form>
+                    </div><!-- leave-comment -->
+
+                </div><!-- comments-area -->
+
+
+            @else
+                <div class="alert alert-danger" role="alert" style="margin-top: 100px;">
+                    برای ارسال نظر و دیدگاه ابتدا باید وارد سایت شوید
+                </div>
+            @endif
         </div><!-- blog-posts -->
     </div><!-- col-lg-4 -->
 

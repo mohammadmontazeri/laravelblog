@@ -18,23 +18,16 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="card-header">ویرایش کامنت </div>
+                    <div class="card-header">پاسخ به کامنت</div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('comment.update',['comment'=>$comment->id])}}">
+                        <form method="POST" action="{{route('replyCommentPost',['comment'=>$comment])}}">
                             @csrf
-                            {{method_field('PATCH')}}
                             <div class="form-group row">
                                 <div class="col-md-6">
                                 <textarea id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="text" required autocomplete="name" autofocus>
-                                    {{$comment->text}}
                                 </textarea>
                                 </div>
                             </div>
-                            <label for="">ویرایش وضعیت</label><hr>
-                            <label for="">فعال</label>
-                            <input type="radio" name="status" <?php if ($comment->status == "1"){echo "checked";} ?> value="1">
-                            <label for="">غیر فعال</label>
-                            <input type="radio" name="status" value="0" <?php if ($comment->status == "0"){echo "checked";} ?>>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary" name="btn">

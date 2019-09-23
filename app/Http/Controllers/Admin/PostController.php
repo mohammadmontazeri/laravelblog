@@ -120,7 +120,7 @@ class PostController extends AdminController
             'cat_id' => $request->cat_id,
             'summery' => $request->summery,
             'detail' => $request->detail,
-            'tags' => $request->tags,
+            'tags' => implode($request->tags,','),
             'image'=> $imgUrl
         ]);
 

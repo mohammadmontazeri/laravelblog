@@ -18,7 +18,6 @@
                             <th>آی دی </th>
                             <th>ایمیل درخواست دهنده</th>
                             <th>تاریخ ثبت </th>
-                            <th>وضعیت</th>
                             <th>حذف</th>
                         </tr>
                         <?php
@@ -36,10 +35,7 @@
                                 ?>
                             </td>
                             <td>
-                                <a class="label label-primary" href="{{url(route('tag.edit',['tag'=>$tag]))}}">ویرایش</a>
-                            </td>
-                            <td>
-                                <form method="post" action="{{route('tag.destroy',['tag'=>$tag->id])}}">
+                                <form method="post" action="{{route('newsletter.destroy',['newsletter'=>$newsletter->id])}}">
                                     {{csrf_field()}}
                                     {{method_field('delete')}}
                                     <button class="btn btn-danger">حذف</button>

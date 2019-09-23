@@ -24,7 +24,7 @@
                             <th>آدرس اینستاگرام</th>
                             <th>آدرس تلگرام</th>
                             <th>درباره من</th>
-                            <th>حذف</th>
+                            <th>ویرایش</th>
                         </tr>
 
                        @foreach($about as $value)

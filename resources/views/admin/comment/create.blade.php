@@ -20,7 +20,7 @@
                     @endif
                     <div class="card-header">ایجاد کامنت جدید</div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('comment.store',['q'=>'addAdmin'])}}">
+                        <form method="POST" action="{{route('comment.store')}}">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">پست را انتخاب کنید</label>

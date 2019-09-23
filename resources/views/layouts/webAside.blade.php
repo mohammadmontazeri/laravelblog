@@ -40,11 +40,14 @@ $insta = \App\Instapost::latest()->paginate(3);
                         </div><!-- src-area -->
 
                     </div><!-- sidebar-section src-area -->
-
+                    @if(session('newsMsg'))
+                        <label for="" style="background-color: #f0004c;color: #fff;padding: 5px;box-sizing: border-box;border-radius: 2.5px;">{{session('newsMsg')}}</label>
+                    @endif
                     <div class="sidebar-section newsletter-area">
                         <h5 class="title"><b>با ارسال ایمیل عضو خبرنامه سایت شوید</b></h5>
-                        <form action="post">
-                            <input class="email-input" type="text" placeholder="ایمیل خود را وارد کنید">
+                        <form  action="{{route('newsletter.store')}}" method="post">
+                            @csrf
+                            <input class="email-input" type="text" name="email" placeholder="ایمیل خود را وارد کنید" >
                             <button class="btn btn-2" type="submit">ارسال</button>
                         </form>
                     </div><!-- sidebar-section newsletter-area -->
@@ -117,7 +120,7 @@ $insta = \App\Instapost::latest()->paginate(3);
                             $tags = \App\Tag::all();
                             foreach ($tags as $tag){
                                 ?>
-                                <li><a class="btn" href="#">{{$tag->name}}</a></li>
+                                <li><a class="btn" href="{{url(route('showPostTag',['id'=>$tag->id]))}}">{{$tag->name}}</a></li>
                             <?php
                             }
                             ?>
