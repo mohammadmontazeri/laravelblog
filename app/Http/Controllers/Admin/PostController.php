@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 
 class PostController extends AdminController
@@ -162,13 +165,38 @@ class PostController extends AdminController
     /// User Side Functions
     public function search(Request $request)
     {
+        Session::put('data',$request->search);
+        //Session::flush();
         if ($request->search == ""){
             $msg = "عبارتی را برای جستجو وارد نمایید";
-            return redirect(route('index'))->with('search_msg',$msg);
+            return redirect(route('searchPage'))->with('search_msg',$msg);
         }else{
-            $posts = \App\Post::where('title','like',"%$request->search%")->latest()->paginate(1);
-            //return view('post.search',compact('posts'));
-            return redirect(route('index'))->with('posts',$posts);
+            $cats = Category::where('name','like',"%$request->search%")->get();
+            //return $cats;
+            foreach ($cats as $key=>$cat){
+                $array[$key] = $cat->id;
+            }
+            if (!empty($array)){
+                $category = Post::whereIn('cat_id',$array)->paginate(1);
+                if (count($category) !=0){
+                    return redirect(route('searchPage'))->with('category',$array);
+                }
+            }
+            $title = \App\Post::where('title','like',"%$request->search%")->latest()->paginate(1);
+            if (count($title) !=0){
+                return redirect(route('searchPage'))->with('title',$title);
+            }
+            $post = Post::where('detail','like',"%$request->search%")->latest()->paginate(3);
+            //return $post;
+            if (count($post) !=0){
+                return redirect(route('searchPage'))->with('post',$post);
+            }
+            $data = session('data');
+            $tag = \App\Post::where('tags','like',"%$data%")->latest()->paginate(1);
+            if (count($tag) !=0){
+                return view('post.search',compact('tag'));
+            }
+                return redirect(route('searchPage'))->with('msg',"مورد مورد نظر یافت نشد");
         }
     }
 }

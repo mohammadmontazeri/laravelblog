@@ -40,12 +40,23 @@ class CommentController extends Controller
         if ($request->text == ""){
             return redirect(route('postDetail',['post'=>$post->id]))->with('msg','لطفا متن مورد نظرتان را پر کنید');
         }else{
+            if ($user->role == "admin"){
+                $status = '1' ;
+            }else{
+                $status = '0' ;
+            }
             Comment::create([
                 'user_id' => $user->id,
                 'post_id' => $post->id,
-                'text' => $request->text
+                'text' => $request->text,
+                'status' => $status
             ]);
-            return redirect(route('postDetail',['post'=>$post->id]))->with('msg','پیفام شما بعد از بررسی نهایی در سایت ثبت خواهد شد');
+            if ($user->role != "admin"){
+                return redirect(route('postDetail',['post'=>$post->id]))->with('msg','پیفام شما بعد از بررسی نهایی در سایت ثبت خواهد شد');
+
+            }else{
+                return redirect(route('postDetail',['post'=>$post->id]));
+            }
         }
     }
 

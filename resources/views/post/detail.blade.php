@@ -8,7 +8,7 @@
                 <div class="image-wrapper"><img src="{{asset("public/$post->image")}}" alt="Blog Image"></div>
                 <div class="icons">
                     <div class="left-area">
-                        <a class="btn caegory-btn" href="#"><b>{{$post->category->name}}</b></a>
+                        <a class="btn caegory-btn" href="{{url(route('showPosts',['id'=>$post->cat_id]))}}"><b>{{$post->category->name}}</b></a>
                     </div>
                     <ul class="right-area social-icons">
                         <li class="like" style="cursor: pointer;" data-test = "{{$post->id}}">
@@ -30,7 +30,7 @@
                             }
                             ?>
                         </li>
-                        <li><a href="#"><i class="ion-android-textsms"></i><?php echo count($post->comments)?></a></li>
+                        <li><a><i class="ion-android-textsms"></i><?php echo count($post->comments)?></a></li>
                     </ul>
                 </div>
                 <p class="date"><em>
@@ -41,15 +41,17 @@
                         echo $v;
                         ?>
                     </em></p>
-                <h3 class="title"><a href="#"><b class="light-color">{{$post->title}}</b></a></h3>
+                <h3 class="title"><a><b class="light-color">{{$post->title}}</b></a></h3>
                 {!! $post->detail !!}
                 <ul>
                     <?php
                         $con = \App\Post::where('id','=',$post->id)->get()->first();
                         $tags = explode(',',$con->tags);
                         foreach ($tags as $tag){
-                    ?>
-                        <li><a class="btn" href="#">{{$tag}}</a></li>
+                            $tag_id = \App\Tag::where('name',$tag)->get()->first();
+                            $id = $tag_id->id;
+                            ?>
+                        <li><a class="btn" href="{{url(route('showPostTag',['id'=>$id]))}}">{{$tag}}</a></li>
                     <?php
                             }
                      ?>

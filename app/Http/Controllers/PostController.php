@@ -17,7 +17,6 @@ class PostController extends Controller
     {
         $num = $post->viewed;
         $viewed = $num + 1 ;
-
         $post->update([
             'viewed' => $viewed
         ]);

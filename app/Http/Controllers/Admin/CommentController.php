@@ -43,11 +43,11 @@ class CommentController extends Controller
         $request->validate([
             'text' => 'required'
         ]);
-
                 Comment::create([
                     'text'=>$request->text,
                     'user_id'=>Auth()->user()->id,
-                    'post_id'=>$request->post_id
+                    'post_id'=>$request->post_id,
+                    'status' => '1'
                 ]);
                 return back()->with('msg','کامنت مورد نظر با موفقیت افزوده شد ');
 

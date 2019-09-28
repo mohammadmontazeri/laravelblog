@@ -8,6 +8,9 @@
         <div class="blog-posts">
             <?php
             $posts = \App\Post::where('cat_id','=',$id->id)->latest()->paginate(1);
+            if ($posts[0]==""){
+                echo "برای دسته مربوطه در حال حاضر پستی ثبت نشده است";
+            }else{
             foreach ($posts as $post){
             ?>
             <div class="single-post">
@@ -35,7 +38,7 @@
                         }
                         ?>
                         </li>
-                        <li><a href="#"><i class="ion-android-textsms"></i><?php echo count($post->comments)?></a></li>
+                        <li><a><i class="ion-android-textsms"></i><?php echo count($post->comments)?></a></li>
                     </ul>
                 </div>
                 <p class="date" style="font-family: main, sans-serif"><em><?php
@@ -51,6 +54,7 @@
             <hr>
 
             <?php
+            }
             }
             ?>
         </div><!-- blog-posts -->

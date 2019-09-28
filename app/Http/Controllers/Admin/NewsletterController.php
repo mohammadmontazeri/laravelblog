@@ -38,15 +38,14 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->email == ""){
-            return back()->with('newsMsg','ایمیل را برای ثبت کردن وارد کنید');
-        }else{
+        $request->validate([
+            'email' => 'required|unique:newsletters'
+        ]);
             Newsletter::create([
                 'email' => $request->email,
                 'status' => '0'
             ]);
             return back()->with('newsMsg','ایمیل شما برای دریافت خبر های سایت ثبت شد');
-        }
     }
 
     /**
@@ -91,6 +90,8 @@ class NewsletterController extends Controller
      */
     public function destroy(Newsletter $newsletter)
     {
-        //
+        $newsletter->delete();
+
+        return back();
     }
 }

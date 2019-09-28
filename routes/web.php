@@ -77,6 +77,9 @@ Route::get('/posts/{id}',function (\App\Category $id){
     return view('category.posts',compact('id'));
 })->name('showPosts');
 Route::post('/search','Admin\PostController@search')->name('search');
+/*Route::get('/search',function (){
+    return view('post.search');
+})->name('searchPage');*/
 Route::post('/ajax','Admin\LikeController@ajaxLike')->name('ajaxLike');
 
 Route::get('/detail/{post}','PostController@index')->name('postDetail');
@@ -92,6 +95,7 @@ Route::post('/contact','ContactController@store')->name('contactStore');
 Route::get('/about-me',function (){
     return view('about');
 })->name('about_me');
+Route::post('/newsletter/store','Admin\NewsletterController@store')->name('newsletterStore');
 /*
 Route::get('/mail',function (){
    \Illuminate\Support\Facades\Mail::to(\Illuminate\Support\Facades\Auth::user()->email)->send(new \App\Mail\authMail());

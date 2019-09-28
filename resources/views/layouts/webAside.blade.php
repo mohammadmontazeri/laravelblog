@@ -43,9 +43,18 @@ $insta = \App\Instapost::latest()->paginate(3);
                     @if(session('newsMsg'))
                         <label for="" style="background-color: #f0004c;color: #fff;padding: 5px;box-sizing: border-box;border-radius: 2.5px;">{{session('newsMsg')}}</label>
                     @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li style="list-style-type: none">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="sidebar-section newsletter-area">
                         <h5 class="title"><b>با ارسال ایمیل عضو خبرنامه سایت شوید</b></h5>
-                        <form  action="{{route('newsletter.store')}}" method="post">
+                        <form  action="{{route('newsletterStore')}}" method="post">
                             @csrf
                             <input class="email-input" type="text" name="email" placeholder="ایمیل خود را وارد کنید" >
                             <button class="btn btn-2" type="submit">ارسال</button>
@@ -74,10 +83,10 @@ $insta = \App\Instapost::latest()->paginate(3);
                             <div class="latest-post" href="#">
                                 <div class="l-post-image"><img src="{{asset("public/$cat->image")}}" alt="Category Image"></div>
                                 <div class="post-info">
-                                    <a class="btn category-btn" href="#"><?php
+                                    <a class="btn category-btn" href="{{url(route('showPosts',['id'=>$cat->id]))}}"><?php
                                      echo $cat->name;
                                         ?></a>
-                                    <h5><a href="#"><b class="light-color">{{$post->title}}</b></a></h5>
+                                    <h5><a href="{{url(route('postDetail',['id'=>$post->id]))}}"><b class="light-color">{{$post->title}}</b></a></h5>
                                     <h6 class="date"><em><?php
                                             $v = new Verta($post->created_at);
                                             $v = \Hekmatinasser\Verta\Verta::instance($post->created_at);
