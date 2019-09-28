@@ -48,7 +48,6 @@
                 }*/
 
                 }
-                $posts = $tag;
                 foreach ($posts as $post){
                 ?>
                 <div class="single-post">
@@ -84,7 +83,7 @@
                                 }
                                 ?>
                             </li>
-                            <li><a><i class="ion-android-textsms"></i><?php echo count($post->comments)?></a></li>
+                            <li><a><i class="ion-android-textsms"></i><?php //echo count($post->comments)?></a></li>
                         </ul>
                     </div>
                     <p class="date" style="font-family: main, sans-serif"><em><?php

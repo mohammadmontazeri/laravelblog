@@ -76,7 +76,9 @@ Route::post('/login','Auth\LoginController@authenticate')->name('userLogin');
 Route::get('/posts/{id}',function (\App\Category $id){
     return view('category.posts',compact('id'));
 })->name('showPosts');
+
 Route::post('/search','Admin\PostController@search')->name('search');
+Route::get('/search','Admin\PostController@search')->name('search');
 /*Route::get('/search',function (){
     return view('post.search');
 })->name('searchPage');*/

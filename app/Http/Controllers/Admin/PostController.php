@@ -8,6 +8,8 @@ use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class PostController extends AdminController
@@ -165,38 +167,79 @@ class PostController extends AdminController
     /// User Side Functions
     public function search(Request $request)
     {
-        Session::put('data',$request->search);
-        //Session::flush();
-        if ($request->search == ""){
-            $msg = "عبارتی را برای جستجو وارد نمایید";
-            return redirect(route('searchPage'))->with('search_msg',$msg);
-        }else{
-            $cats = Category::where('name','like',"%$request->search%")->get();
-            //return $cats;
-            foreach ($cats as $key=>$cat){
-                $array[$key] = $cat->id;
-            }
-            if (!empty($array)){
-                $category = Post::whereIn('cat_id',$array)->paginate(1);
-                if (count($category) !=0){
-                    return redirect(route('searchPage'))->with('category',$array);
-                }
-            }
-            $title = \App\Post::where('title','like',"%$request->search%")->latest()->paginate(1);
-            if (count($title) !=0){
-                return redirect(route('searchPage'))->with('title',$title);
-            }
-            $post = Post::where('detail','like',"%$request->search%")->latest()->paginate(3);
-            //return $post;
-            if (count($post) !=0){
-                return redirect(route('searchPage'))->with('post',$post);
-            }
-            $data = session('data');
-            $tag = \App\Post::where('tags','like',"%$data%")->latest()->paginate(1);
-            if (count($tag) !=0){
-                return view('post.search',compact('tag'));
-            }
-                return redirect(route('searchPage'))->with('msg',"مورد مورد نظر یافت نشد");
+        $mrg_1 = [];
+        $mrg_2 = [];
+        $mrg_3 = [];
+        $mrg_4 = [];
+        //return $request;
+        if (!empty($request->search)){
+            Session::forget('data');
+            Session::put('data',$request->search);
         }
+            $data = session('data');
+
+          //Session::flush();
+                      $cats = Category::where('name', 'like', "%$data%")->get();
+                      //return $cats;
+                      foreach ($cats as $key => $cat) {
+                          $array[$key] = $cat->id;
+                      }
+                      if (!empty($array)) {
+                          $category = Post::whereIn('cat_id', $array)->latest()->get();
+                      }else{
+                          $category =[];
+                      }
+                       //   if (count($category) != 0) {
+                              $posts[0] = $category;
+                              foreach ($posts[0] as $key=>$post){
+                                  $mrg_1[$key] = $post;
+                              }
+                              //return view('post.search', compact('posts'));
+                          //}
+                      $title = \App\Post::where('title', 'like', "%$data%")->latest()->get();
+                      //if (count($title) != 0) {
+                          $posts[1] = $title;
+                          foreach ($posts[1] as $key=>$post){
+                              $mrg_2[$key] = $post;
+                          }
+                          //return view('post.search', compact('posts'));
+                     // }
+                      $post = Post::where('detail', 'like', "%$data%")->latest()->get();
+                      //return $post;
+                      //if (count($post) != 0) {
+                          $posts[2] = $post;
+                          foreach ($posts[2] as $key=>$post){
+                              $mrg_3[$key] = $post;
+                          }
+                         // return view('post.search', compact('posts'));
+                    //  }
+                      $tag = \App\Post::where('tags', 'like', "%$data%")->latest()->get();
+                    //  if (count($tag) !=0){
+                          $posts[3] = $tag;
+                          foreach ($posts[3] as $key=>$post){
+                              $mrg_4[$key] = $post;
+                          }
+                     // }
+
+                            $res = array_merge($mrg_1,$mrg_2,$mrg_3,$mrg_4);
+                          $res2 = array_unique($res);
+                          //$posts = new Paginator($res2,2);
+                         // $posts->withPath('http://localhost:8888/blog/search');
+                        //return $res2;
+                       // $con = Paginator::make($res2);
+                                $posts=DB::table("posts")
+                                    ->join("categories",'categories.id','=','posts.cat_id')
+                                    ->select('posts.*')
+                                    ->where("posts.detail","like","%$data%")
+                                    ->orWhere("posts.title","like","%$data%")
+                                    ->orWhere("posts.tags","like","%$data%")
+                                    ->orWhere("categories.name",'like',"%$data%")
+                                    ->paginate(2);
+
+
+                        return view('post.search', compact('posts'));
+
+        // return redirect(route('searchPage'))->with('msg',"مورد مورد نظر یافت نشد");
+
     }
 }
