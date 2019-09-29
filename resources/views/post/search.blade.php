@@ -4,51 +4,17 @@
     <div class="col-lg-8 col-md-12">
         <div class="blog-posts">
 
-            @if(session('msg'))
+            @if(isset($msg))
                 <div class="col-lg-8 col-md-12" style="direction: rtl;background-color: #f0004c;color: #fff;">
-                    {{session('msg')}}
+                    {{$msg}}
                 </div>
             @else
-                <?php
-                // \Illuminate\Support\Facades\Session::forget('tag');
-                //\Illuminate\Support\Facades\Session::forget('tag_');
-                //\Illuminate\Support\Facades\Session::flush();
-                if (session('tag')||session('tag_')){
-                //\Illuminate\Support\Facades\Session::flush();die;
-                ?>
                 <h3 style="margin-bottom: 20px;padding: 10px;">
                     نتیجه جستجو شما
                 </h3>
-                <?php
-                /*if (session('tag_')==""){
-                    \Illuminate\Support\Facades\Session::put('tag_',session('tag'));
-                }
-                $session_tag = session('tag_');
-                $posts = \App\Post::where('tags','like',$session_tag)->latest()->paginate(2);
-
-                }elseif (session('category')||session('category_')){
-                    if (session('category_')==""){
-                        \Illuminate\Support\Facades\Session::put('category_',session('category'));
-                    }
-                    $session_cat = session('category_');
-                    $posts = \App\Post::whereIn('cat_id',$session_cat)->latest()->paginate(1);
-                }
-                elseif (session('title')||session('title_')){
-                    if (session('title_')==""){
-                        \Illuminate\Support\Facades\Session::put('title_',session('title'));
-                    }
-                    $session_title = session('title_');
-                    $posts = $session_title;
-                }elseif (session('post')||session('post_')){
-                    if (session('post_')==""){
-                        \Illuminate\Support\Facades\Session::put('post_',session('post'));
-                    }
-                    $session_post = session('post_');
-                    $posts = $session_post;
-                }*/
-
-                }
+            <?php
                 foreach ($posts as $post){
+                    $comments = \App\Comment::where('post_id',$post->id)->get();
                 ?>
                 <div class="single-post">
                     <div class="image-wrapper"><img src="{{asset("public/$post->image")}}" alt="Blog Image"></div>
@@ -83,7 +49,7 @@
                                 }
                                 ?>
                             </li>
-                            <li><a><i class="ion-android-textsms"></i><?php //echo count($post->comments)?></a></li>
+                            <li><a><i class="ion-android-textsms"></i><?php echo count($comments)?></a></li>
                         </ul>
                     </div>
                     <p class="date" style="font-family: main, sans-serif"><em><?php

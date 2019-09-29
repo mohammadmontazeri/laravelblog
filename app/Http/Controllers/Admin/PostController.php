@@ -167,11 +167,15 @@ class PostController extends AdminController
     /// User Side Functions
     public function search(Request $request)
     {
-        $mrg_1 = [];
+       /* $mrg_1 = [];
         $mrg_2 = [];
         $mrg_3 = [];
-        $mrg_4 = [];
+        $mrg_4 = [];*/
         //return $request;
+        if ($request->search==null&&empty($request->page)){
+            $msg = "برای جستجو موردی را وارد کنید";
+            return view('post.search',compact('msg'));
+        }
         if (!empty($request->search)){
             Session::forget('data');
             Session::put('data',$request->search);
@@ -179,7 +183,7 @@ class PostController extends AdminController
             $data = session('data');
 
           //Session::flush();
-                      $cats = Category::where('name', 'like', "%$data%")->get();
+                      /*$cats = Category::where('name', 'like', "%$data%")->get();
                       //return $cats;
                       foreach ($cats as $key => $cat) {
                           $array[$key] = $cat->id;
@@ -218,11 +222,11 @@ class PostController extends AdminController
                           $posts[3] = $tag;
                           foreach ($posts[3] as $key=>$post){
                               $mrg_4[$key] = $post;
-                          }
+                          }*/
                      // }
 
-                            $res = array_merge($mrg_1,$mrg_2,$mrg_3,$mrg_4);
-                          $res2 = array_unique($res);
+                           // $res = array_merge($mrg_1,$mrg_2,$mrg_3,$mrg_4);
+                         // $res2 = array_unique($res);
                           //$posts = new Paginator($res2,2);
                          // $posts->withPath('http://localhost:8888/blog/search');
                         //return $res2;
@@ -230,14 +234,19 @@ class PostController extends AdminController
                                 $posts=DB::table("posts")
                                     ->join("categories",'categories.id','=','posts.cat_id')
                                     ->select('posts.*')
+                                    //->select('comments.*')
                                     ->where("posts.detail","like","%$data%")
                                     ->orWhere("posts.title","like","%$data%")
                                     ->orWhere("posts.tags","like","%$data%")
                                     ->orWhere("categories.name",'like',"%$data%")
-                                    ->paginate(2);
+                                    ->paginate(1);
 
-
-                        return view('post.search', compact('posts'));
+                                if (count($posts) == 0){
+                                    $msg = "موردی یافت نشد";
+                                    return view('post.search', compact('msg'));
+                                }else{
+                                    return view('post.search', compact('posts'));
+                                }
 
         // return redirect(route('searchPage'))->with('msg',"مورد مورد نظر یافت نشد");
 
